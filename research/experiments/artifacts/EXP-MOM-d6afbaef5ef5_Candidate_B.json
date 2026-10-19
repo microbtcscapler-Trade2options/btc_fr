@@ -1,0 +1,5477 @@
+{
+  "experiment_id": "EXP-MOM-d6afbaef5ef5",
+  "strategy_name": "CandidateB_Regime_Plus_Advisory",
+  "strategy_version": "1.0.0",
+  "symbol": "BTCUSDT",
+  "timeframe": "15m",
+  "start_date": "2026-10-08 12:45:00+00:00",
+  "end_date": "2026-10-18 22:15:00+00:00",
+  "in_sample_metrics": {
+    "net_profit_usd": -475.9,
+    "net_return_pct": -4.76,
+    "total_trades": 31,
+    "winning_trades": 6,
+    "losing_trades": 25,
+    "win_rate_pct": 19.4,
+    "profit_factor": 0.41,
+    "expectancy_usd": -15.35,
+    "max_drawdown_usd": 484.75,
+    "max_drawdown_pct": 4.84,
+    "avg_win_usd": 55.8,
+    "avg_loss_usd": 32.43,
+    "sharpe_ratio": -30.56,
+    "total_fees_slippage_usd": 204.99,
+    "regime_breakdown": {
+      "BULLISH_TREND": {
+        "trades": 6,
+        "pnl": -157.67,
+        "wins": 0,
+        "win_rate_pct": 0.0
+      },
+      "TRANSITION_UNCERTAIN": {
+        "trades": 8,
+        "pnl": -40.45,
+        "wins": 2,
+        "win_rate_pct": 25.0
+      },
+      "SIDEWAYS": {
+        "trades": 8,
+        "pnl": -156.7,
+        "wins": 1,
+        "win_rate_pct": 12.5
+      },
+      "BEARISH_TREND": {
+        "trades": 9,
+        "pnl": -121.07,
+        "wins": 3,
+        "win_rate_pct": 33.3
+      }
+    }
+  },
+  "out_of_sample_metrics": {
+    "net_profit_usd": -186.83,
+    "net_return_pct": -1.87,
+    "total_trades": 7,
+    "winning_trades": 0,
+    "losing_trades": 7,
+    "win_rate_pct": 0.0,
+    "profit_factor": 0.0,
+    "expectancy_usd": -26.69,
+    "max_drawdown_usd": 186.83,
+    "max_drawdown_pct": 1.87,
+    "avg_win_usd": 0.0,
+    "avg_loss_usd": 26.69,
+    "sharpe_ratio": -814.48,
+    "total_fees_slippage_usd": 45.7,
+    "regime_breakdown": {
+      "BEARISH_TREND": {
+        "trades": 4,
+        "pnl": -114.81,
+        "wins": 0,
+        "win_rate_pct": 0.0
+      },
+      "BULLISH_TREND": {
+        "trades": 3,
+        "pnl": -72.03,
+        "wins": 0,
+        "win_rate_pct": 0.0
+      }
+    }
+  },
+  "equity_curve": [
+    {
+      "timestamp": "2026-10-09 01:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 01:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 02:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 02:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 02:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 02:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 03:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 03:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 03:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 03:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 04:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 04:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 04:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 04:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 05:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 05:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 05:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 05:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 06:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 06:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 06:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 06:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 07:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 07:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 07:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 07:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 08:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 08:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 08:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 08:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 09:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 09:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 09:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 09:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 10:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 10:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 10:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 10:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 11:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 11:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 11:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 11:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 12:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 12:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 12:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 12:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 13:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 13:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 13:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 13:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 14:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 14:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 14:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 14:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 15:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 15:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 15:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 15:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 16:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 16:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 16:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 16:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 17:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 17:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 17:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 17:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 18:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 18:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 18:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 18:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 19:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 19:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 19:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 19:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 20:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 20:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 20:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 20:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 21:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 21:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 21:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 21:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 22:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 22:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 22:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 22:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 23:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 23:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 23:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-09 23:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 00:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 00:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 00:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 00:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 01:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 01:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 01:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 01:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 02:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 02:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 02:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 02:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 03:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 03:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 03:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 03:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 04:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 04:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 04:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 04:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 05:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 05:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 05:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 05:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 06:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 06:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 06:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 06:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 07:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 07:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 07:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 07:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 08:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 08:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 08:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 08:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 09:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 09:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 09:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 09:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 10:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 10:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 10:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 10:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 11:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 11:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 11:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 11:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 12:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 12:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 12:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 12:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 13:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 13:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 13:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 13:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 14:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 14:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 14:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 14:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 15:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 9992.46,
+      "drawdown_pct": 0.08
+    },
+    {
+      "timestamp": "2026-10-10 15:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9993.45,
+      "drawdown_pct": 0.07
+    },
+    {
+      "timestamp": "2026-10-10 15:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.82,
+      "drawdown_pct": 0.01
+    },
+    {
+      "timestamp": "2026-10-10 15:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.73,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 16:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.65,
+      "drawdown_pct": 0.01
+    },
+    {
+      "timestamp": "2026-10-10 16:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9995.64,
+      "drawdown_pct": 0.04
+    },
+    {
+      "timestamp": "2026-10-10 16:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.96,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 16:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 9996.02,
+      "drawdown_pct": 0.04
+    },
+    {
+      "timestamp": "2026-10-10 17:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10001.43,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 17:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10001.16,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 17:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10008.85,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-10 17:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10006.65,
+      "drawdown_pct": 0.02
+    },
+    {
+      "timestamp": "2026-10-10 18:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10001.22,
+      "drawdown_pct": 0.08
+    },
+    {
+      "timestamp": "2026-10-10 18:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9996.95,
+      "drawdown_pct": 0.12
+    },
+    {
+      "timestamp": "2026-10-10 18:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 9997.47,
+      "drawdown_pct": 0.11
+    },
+    {
+      "timestamp": "2026-10-10 18:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.25,
+      "drawdown_pct": 0.11
+    },
+    {
+      "timestamp": "2026-10-10 19:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.25,
+      "drawdown_pct": 0.11
+    },
+    {
+      "timestamp": "2026-10-10 19:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.12,
+      "drawdown_pct": 0.1
+    },
+    {
+      "timestamp": "2026-10-10 19:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10003.55,
+      "drawdown_pct": 0.05
+    },
+    {
+      "timestamp": "2026-10-10 19:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10003.39,
+      "drawdown_pct": 0.05
+    },
+    {
+      "timestamp": "2026-10-10 20:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.29,
+      "drawdown_pct": 0.09
+    },
+    {
+      "timestamp": "2026-10-10 20:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.39,
+      "drawdown_pct": 0.1
+    },
+    {
+      "timestamp": "2026-10-10 20:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10001.65,
+      "drawdown_pct": 0.07
+    },
+    {
+      "timestamp": "2026-10-10 20:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.85,
+      "drawdown_pct": 0.1
+    },
+    {
+      "timestamp": "2026-10-10 21:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 9996.85,
+      "drawdown_pct": 0.12
+    },
+    {
+      "timestamp": "2026-10-10 21:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.8,
+      "drawdown_pct": 0.09
+    },
+    {
+      "timestamp": "2026-10-10 21:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10002.72,
+      "drawdown_pct": 0.06
+    },
+    {
+      "timestamp": "2026-10-10 21:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.85,
+      "drawdown_pct": 0.1
+    },
+    {
+      "timestamp": "2026-10-10 22:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 9998.45,
+      "drawdown_pct": 0.1
+    },
+    {
+      "timestamp": "2026-10-10 22:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.85,
+      "drawdown_pct": 0.09
+    },
+    {
+      "timestamp": "2026-10-10 22:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 9999.85,
+      "drawdown_pct": 0.09
+    },
+    {
+      "timestamp": "2026-10-10 22:45:00+00:00",
+      "balance": 9981.43,
+      "equity": 9981.43,
+      "drawdown_pct": 0.27
+    },
+    {
+      "timestamp": "2026-10-10 23:00:00+00:00",
+      "balance": 9981.43,
+      "equity": 9981.43,
+      "drawdown_pct": 0.27
+    },
+    {
+      "timestamp": "2026-10-10 23:15:00+00:00",
+      "balance": 9981.43,
+      "equity": 9975.72,
+      "drawdown_pct": 0.33
+    },
+    {
+      "timestamp": "2026-10-10 23:30:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-10 23:45:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 00:00:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 00:15:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 00:30:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 00:45:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 01:00:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 01:15:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 01:30:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 01:45:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 02:00:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 02:15:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 02:30:00+00:00",
+      "balance": 9964.76,
+      "equity": 9964.76,
+      "drawdown_pct": 0.44
+    },
+    {
+      "timestamp": "2026-10-11 02:45:00+00:00",
+      "balance": 9964.76,
+      "equity": 9968.44,
+      "drawdown_pct": 0.4
+    },
+    {
+      "timestamp": "2026-10-11 03:00:00+00:00",
+      "balance": 9949.7,
+      "equity": 9949.7,
+      "drawdown_pct": 0.59
+    },
+    {
+      "timestamp": "2026-10-11 03:15:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 03:30:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 03:45:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 04:00:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 04:15:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 04:30:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 04:45:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 05:00:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 05:15:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 05:30:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 05:45:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 06:00:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 06:15:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 06:30:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 06:45:00+00:00",
+      "balance": 9934.25,
+      "equity": 9934.25,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 07:00:00+00:00",
+      "balance": 9934.25,
+      "equity": 9933.96,
+      "drawdown_pct": 0.75
+    },
+    {
+      "timestamp": "2026-10-11 07:15:00+00:00",
+      "balance": 9918.36,
+      "equity": 9918.36,
+      "drawdown_pct": 0.9
+    },
+    {
+      "timestamp": "2026-10-11 07:30:00+00:00",
+      "balance": 9901.7,
+      "equity": 9901.7,
+      "drawdown_pct": 1.07
+    },
+    {
+      "timestamp": "2026-10-11 07:45:00+00:00",
+      "balance": 9901.7,
+      "equity": 9894.65,
+      "drawdown_pct": 1.14
+    },
+    {
+      "timestamp": "2026-10-11 08:00:00+00:00",
+      "balance": 9901.7,
+      "equity": 9897.48,
+      "drawdown_pct": 1.11
+    },
+    {
+      "timestamp": "2026-10-11 08:15:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 08:30:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 08:45:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 09:00:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 09:15:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 09:30:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 09:45:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 10:00:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 10:15:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 10:30:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 10:45:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 11:00:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 11:15:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 11:30:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 11:45:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 12:00:00+00:00",
+      "balance": 9884.62,
+      "equity": 9884.62,
+      "drawdown_pct": 1.24
+    },
+    {
+      "timestamp": "2026-10-11 12:15:00+00:00",
+      "balance": 9884.62,
+      "equity": 9879.86,
+      "drawdown_pct": 1.29
+    },
+    {
+      "timestamp": "2026-10-11 12:30:00+00:00",
+      "balance": 9884.62,
+      "equity": 9883.46,
+      "drawdown_pct": 1.25
+    },
+    {
+      "timestamp": "2026-10-11 12:45:00+00:00",
+      "balance": 9884.62,
+      "equity": 9877.67,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 13:00:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 13:15:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 13:30:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 13:45:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 14:00:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 14:15:00+00:00",
+      "balance": 9868.06,
+      "equity": 9868.06,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-11 14:30:00+00:00",
+      "balance": 9868.06,
+      "equity": 9870.51,
+      "drawdown_pct": 1.38
+    },
+    {
+      "timestamp": "2026-10-11 14:45:00+00:00",
+      "balance": 9868.06,
+      "equity": 9869.3,
+      "drawdown_pct": 1.39
+    },
+    {
+      "timestamp": "2026-10-11 15:00:00+00:00",
+      "balance": 9868.06,
+      "equity": 9869.71,
+      "drawdown_pct": 1.39
+    },
+    {
+      "timestamp": "2026-10-11 15:15:00+00:00",
+      "balance": 9868.06,
+      "equity": 9871.31,
+      "drawdown_pct": 1.37
+    },
+    {
+      "timestamp": "2026-10-11 15:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 15:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 16:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 16:15:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 16:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 16:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 17:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 17:15:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 17:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 17:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 18:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 18:15:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 18:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 18:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 19:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 19:15:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 19:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9877.31,
+      "drawdown_pct": 1.31
+    },
+    {
+      "timestamp": "2026-10-11 19:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9874.08,
+      "drawdown_pct": 1.35
+    },
+    {
+      "timestamp": "2026-10-11 20:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9878.95,
+      "drawdown_pct": 1.3
+    },
+    {
+      "timestamp": "2026-10-11 20:15:00+00:00",
+      "balance": 9877.31,
+      "equity": 9871.35,
+      "drawdown_pct": 1.37
+    },
+    {
+      "timestamp": "2026-10-11 20:30:00+00:00",
+      "balance": 9877.31,
+      "equity": 9875.08,
+      "drawdown_pct": 1.34
+    },
+    {
+      "timestamp": "2026-10-11 20:45:00+00:00",
+      "balance": 9877.31,
+      "equity": 9875.03,
+      "drawdown_pct": 1.34
+    },
+    {
+      "timestamp": "2026-10-11 21:00:00+00:00",
+      "balance": 9877.31,
+      "equity": 9862.76,
+      "drawdown_pct": 1.46
+    },
+    {
+      "timestamp": "2026-10-11 21:15:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 21:30:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 21:45:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 22:00:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 22:15:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 22:30:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 22:45:00+00:00",
+      "balance": 9849.67,
+      "equity": 9849.67,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-11 23:00:00+00:00",
+      "balance": 9849.67,
+      "equity": 9848.72,
+      "drawdown_pct": 1.6
+    },
+    {
+      "timestamp": "2026-10-11 23:15:00+00:00",
+      "balance": 9849.67,
+      "equity": 9851.92,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-11 23:30:00+00:00",
+      "balance": 9849.67,
+      "equity": 9848.57,
+      "drawdown_pct": 1.6
+    },
+    {
+      "timestamp": "2026-10-11 23:45:00+00:00",
+      "balance": 9849.67,
+      "equity": 9856.43,
+      "drawdown_pct": 1.52
+    },
+    {
+      "timestamp": "2026-10-12 00:00:00+00:00",
+      "balance": 9849.67,
+      "equity": 9857.32,
+      "drawdown_pct": 1.51
+    },
+    {
+      "timestamp": "2026-10-12 00:15:00+00:00",
+      "balance": 9849.67,
+      "equity": 9863.94,
+      "drawdown_pct": 1.45
+    },
+    {
+      "timestamp": "2026-10-12 00:30:00+00:00",
+      "balance": 9849.67,
+      "equity": 9865.72,
+      "drawdown_pct": 1.43
+    },
+    {
+      "timestamp": "2026-10-12 00:45:00+00:00",
+      "balance": 9849.67,
+      "equity": 9875.39,
+      "drawdown_pct": 1.33
+    },
+    {
+      "timestamp": "2026-10-12 01:00:00+00:00",
+      "balance": 9849.67,
+      "equity": 9875.63,
+      "drawdown_pct": 1.33
+    },
+    {
+      "timestamp": "2026-10-12 01:15:00+00:00",
+      "balance": 9849.67,
+      "equity": 9859.35,
+      "drawdown_pct": 1.49
+    },
+    {
+      "timestamp": "2026-10-12 01:30:00+00:00",
+      "balance": 9849.67,
+      "equity": 9846.97,
+      "drawdown_pct": 1.62
+    },
+    {
+      "timestamp": "2026-10-12 01:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 02:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 02:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 02:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 02:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 03:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 03:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 03:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 03:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 04:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 04:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 04:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 04:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 05:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 05:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 05:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 05:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 06:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 06:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 06:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 06:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 07:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 07:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 07:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 07:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 08:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 08:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 08:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 08:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 09:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 09:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 09:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 09:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 10:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 10:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 10:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 10:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 11:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 11:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 11:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 11:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 12:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 12:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 12:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 12:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 13:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 13:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 13:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 13:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 14:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 14:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 14:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 14:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 15:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 15:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 15:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 15:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 16:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9823.47,
+      "drawdown_pct": 1.85
+    },
+    {
+      "timestamp": "2026-10-12 16:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9811.75,
+      "drawdown_pct": 1.97
+    },
+    {
+      "timestamp": "2026-10-12 16:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9814.4,
+      "drawdown_pct": 1.94
+    },
+    {
+      "timestamp": "2026-10-12 16:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9843.71,
+      "drawdown_pct": 1.65
+    },
+    {
+      "timestamp": "2026-10-12 17:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9832.7,
+      "drawdown_pct": 1.76
+    },
+    {
+      "timestamp": "2026-10-12 17:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9848.97,
+      "drawdown_pct": 1.6
+    },
+    {
+      "timestamp": "2026-10-12 17:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9846.78,
+      "drawdown_pct": 1.62
+    },
+    {
+      "timestamp": "2026-10-12 17:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9844.37,
+      "drawdown_pct": 1.64
+    },
+    {
+      "timestamp": "2026-10-12 18:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9843.1,
+      "drawdown_pct": 1.66
+    },
+    {
+      "timestamp": "2026-10-12 18:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9844.17,
+      "drawdown_pct": 1.65
+    },
+    {
+      "timestamp": "2026-10-12 18:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9847.57,
+      "drawdown_pct": 1.61
+    },
+    {
+      "timestamp": "2026-10-12 18:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9849.97,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-12 19:00:00+00:00",
+      "balance": 9823.47,
+      "equity": 9855.52,
+      "drawdown_pct": 1.53
+    },
+    {
+      "timestamp": "2026-10-12 19:15:00+00:00",
+      "balance": 9823.47,
+      "equity": 9822.75,
+      "drawdown_pct": 1.86
+    },
+    {
+      "timestamp": "2026-10-12 19:30:00+00:00",
+      "balance": 9823.47,
+      "equity": 9815.06,
+      "drawdown_pct": 1.94
+    },
+    {
+      "timestamp": "2026-10-12 19:45:00+00:00",
+      "balance": 9823.47,
+      "equity": 9808.59,
+      "drawdown_pct": 2.0
+    },
+    {
+      "timestamp": "2026-10-12 20:00:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 20:15:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 20:30:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 20:45:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 21:00:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 21:15:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 21:30:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 21:45:00+00:00",
+      "balance": 9784.59,
+      "equity": 9784.59,
+      "drawdown_pct": 2.24
+    },
+    {
+      "timestamp": "2026-10-12 22:00:00+00:00",
+      "balance": 9784.59,
+      "equity": 9783.24,
+      "drawdown_pct": 2.25
+    },
+    {
+      "timestamp": "2026-10-12 22:15:00+00:00",
+      "balance": 9784.59,
+      "equity": 9795.14,
+      "drawdown_pct": 2.14
+    },
+    {
+      "timestamp": "2026-10-12 22:30:00+00:00",
+      "balance": 9784.59,
+      "equity": 9796.28,
+      "drawdown_pct": 2.12
+    },
+    {
+      "timestamp": "2026-10-12 22:45:00+00:00",
+      "balance": 9828.04,
+      "equity": 9828.04,
+      "drawdown_pct": 1.81
+    },
+    {
+      "timestamp": "2026-10-12 23:00:00+00:00",
+      "balance": 9875.6,
+      "equity": 9875.6,
+      "drawdown_pct": 1.33
+    },
+    {
+      "timestamp": "2026-10-12 23:15:00+00:00",
+      "balance": 9875.6,
+      "equity": 9883.46,
+      "drawdown_pct": 1.25
+    },
+    {
+      "timestamp": "2026-10-12 23:30:00+00:00",
+      "balance": 9875.6,
+      "equity": 9903.7,
+      "drawdown_pct": 1.05
+    },
+    {
+      "timestamp": "2026-10-12 23:45:00+00:00",
+      "balance": 9875.6,
+      "equity": 9904.62,
+      "drawdown_pct": 1.04
+    },
+    {
+      "timestamp": "2026-10-13 00:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 00:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 00:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 00:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 01:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 01:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 01:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 01:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 02:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 02:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 02:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 02:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 03:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 03:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 03:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 03:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 04:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 04:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 04:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 04:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 05:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 05:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 05:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 05:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 06:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 06:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 06:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 06:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 07:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 07:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 07:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 07:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9930.29,
+      "drawdown_pct": 0.78
+    },
+    {
+      "timestamp": "2026-10-13 08:00:00+00:00",
+      "balance": 9930.29,
+      "equity": 9959.8,
+      "drawdown_pct": 0.49
+    },
+    {
+      "timestamp": "2026-10-13 08:15:00+00:00",
+      "balance": 9930.29,
+      "equity": 9936.0,
+      "drawdown_pct": 0.73
+    },
+    {
+      "timestamp": "2026-10-13 08:30:00+00:00",
+      "balance": 9930.29,
+      "equity": 9923.78,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-13 08:45:00+00:00",
+      "balance": 9930.29,
+      "equity": 9901.71,
+      "drawdown_pct": 1.07
+    },
+    {
+      "timestamp": "2026-10-13 09:00:00+00:00",
+      "balance": 9890.04,
+      "equity": 9890.04,
+      "drawdown_pct": 1.19
+    },
+    {
+      "timestamp": "2026-10-13 09:15:00+00:00",
+      "balance": 9890.04,
+      "equity": 9890.04,
+      "drawdown_pct": 1.19
+    },
+    {
+      "timestamp": "2026-10-13 09:30:00+00:00",
+      "balance": 9890.04,
+      "equity": 9890.04,
+      "drawdown_pct": 1.19
+    },
+    {
+      "timestamp": "2026-10-13 09:45:00+00:00",
+      "balance": 9890.04,
+      "equity": 9890.04,
+      "drawdown_pct": 1.19
+    },
+    {
+      "timestamp": "2026-10-13 10:00:00+00:00",
+      "balance": 9890.04,
+      "equity": 9879.44,
+      "drawdown_pct": 1.29
+    },
+    {
+      "timestamp": "2026-10-13 10:15:00+00:00",
+      "balance": 9890.04,
+      "equity": 9873.49,
+      "drawdown_pct": 1.35
+    },
+    {
+      "timestamp": "2026-10-13 10:30:00+00:00",
+      "balance": 9849.34,
+      "equity": 9849.34,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-13 10:45:00+00:00",
+      "balance": 9849.34,
+      "equity": 9849.34,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-13 11:00:00+00:00",
+      "balance": 9849.34,
+      "equity": 9849.34,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-13 11:15:00+00:00",
+      "balance": 9849.34,
+      "equity": 9849.34,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-13 11:30:00+00:00",
+      "balance": 9849.34,
+      "equity": 9849.34,
+      "drawdown_pct": 1.59
+    },
+    {
+      "timestamp": "2026-10-13 11:45:00+00:00",
+      "balance": 9849.34,
+      "equity": 9829.54,
+      "drawdown_pct": 1.79
+    },
+    {
+      "timestamp": "2026-10-13 12:00:00+00:00",
+      "balance": 9849.34,
+      "equity": 9822.73,
+      "drawdown_pct": 1.86
+    },
+    {
+      "timestamp": "2026-10-13 12:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 12:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 12:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 13:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 13:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 13:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 13:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 14:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 14:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 14:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 14:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 15:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 15:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 15:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 15:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 16:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 16:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 16:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 16:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 17:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 17:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 17:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 17:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 18:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 18:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 18:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 18:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 19:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 19:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 19:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 19:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 20:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 20:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 20:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 20:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 21:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 21:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 21:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 21:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 22:00:00+00:00",
+      "balance": 9807.46,
+      "equity": 9807.46,
+      "drawdown_pct": 2.01
+    },
+    {
+      "timestamp": "2026-10-13 22:15:00+00:00",
+      "balance": 9807.46,
+      "equity": 9797.4,
+      "drawdown_pct": 2.11
+    },
+    {
+      "timestamp": "2026-10-13 22:30:00+00:00",
+      "balance": 9807.46,
+      "equity": 9805.75,
+      "drawdown_pct": 2.03
+    },
+    {
+      "timestamp": "2026-10-13 22:45:00+00:00",
+      "balance": 9807.46,
+      "equity": 9805.0,
+      "drawdown_pct": 2.04
+    },
+    {
+      "timestamp": "2026-10-13 23:00:00+00:00",
+      "balance": 9778.27,
+      "equity": 9778.27,
+      "drawdown_pct": 2.3
+    },
+    {
+      "timestamp": "2026-10-13 23:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-13 23:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-13 23:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 00:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 00:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 00:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 00:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 01:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 01:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 01:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 01:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 02:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 02:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 02:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 02:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 03:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9751.36,
+      "drawdown_pct": 2.57
+    },
+    {
+      "timestamp": "2026-10-14 03:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9762.6,
+      "drawdown_pct": 2.46
+    },
+    {
+      "timestamp": "2026-10-14 03:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9766.66,
+      "drawdown_pct": 2.42
+    },
+    {
+      "timestamp": "2026-10-14 03:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9754.61,
+      "drawdown_pct": 2.54
+    },
+    {
+      "timestamp": "2026-10-14 04:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9756.8,
+      "drawdown_pct": 2.52
+    },
+    {
+      "timestamp": "2026-10-14 04:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9764.4,
+      "drawdown_pct": 2.44
+    },
+    {
+      "timestamp": "2026-10-14 04:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9758.41,
+      "drawdown_pct": 2.5
+    },
+    {
+      "timestamp": "2026-10-14 04:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9758.91,
+      "drawdown_pct": 2.5
+    },
+    {
+      "timestamp": "2026-10-14 05:00:00+00:00",
+      "balance": 9751.36,
+      "equity": 9738.09,
+      "drawdown_pct": 2.71
+    },
+    {
+      "timestamp": "2026-10-14 05:15:00+00:00",
+      "balance": 9751.36,
+      "equity": 9745.6,
+      "drawdown_pct": 2.63
+    },
+    {
+      "timestamp": "2026-10-14 05:30:00+00:00",
+      "balance": 9751.36,
+      "equity": 9739.61,
+      "drawdown_pct": 2.69
+    },
+    {
+      "timestamp": "2026-10-14 05:45:00+00:00",
+      "balance": 9751.36,
+      "equity": 9731.21,
+      "drawdown_pct": 2.77
+    },
+    {
+      "timestamp": "2026-10-14 06:00:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 06:15:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 06:30:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 06:45:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 07:00:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 07:15:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 07:30:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 07:45:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 08:00:00+00:00",
+      "balance": 9717.91,
+      "equity": 9717.91,
+      "drawdown_pct": 2.91
+    },
+    {
+      "timestamp": "2026-10-14 08:15:00+00:00",
+      "balance": 9717.91,
+      "equity": 9741.9,
+      "drawdown_pct": 2.67
+    },
+    {
+      "timestamp": "2026-10-14 08:30:00+00:00",
+      "balance": 9717.91,
+      "equity": 9705.73,
+      "drawdown_pct": 3.03
+    },
+    {
+      "timestamp": "2026-10-14 08:45:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 09:00:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 09:15:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 09:30:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 09:45:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 10:00:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 10:15:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 10:30:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 10:45:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 11:00:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 11:15:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 11:30:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 11:45:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 12:00:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 12:15:00+00:00",
+      "balance": 9686.55,
+      "equity": 9686.55,
+      "drawdown_pct": 3.22
+    },
+    {
+      "timestamp": "2026-10-14 12:30:00+00:00",
+      "balance": 9651.59,
+      "equity": 9651.59,
+      "drawdown_pct": 3.57
+    },
+    {
+      "timestamp": "2026-10-14 12:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 13:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 13:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 13:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 13:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 14:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 14:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 14:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 14:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 15:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 15:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 15:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 15:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 16:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9615.83,
+      "drawdown_pct": 3.93
+    },
+    {
+      "timestamp": "2026-10-14 16:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9604.36,
+      "drawdown_pct": 4.04
+    },
+    {
+      "timestamp": "2026-10-14 16:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9582.39,
+      "drawdown_pct": 4.26
+    },
+    {
+      "timestamp": "2026-10-14 16:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9576.96,
+      "drawdown_pct": 4.32
+    },
+    {
+      "timestamp": "2026-10-14 17:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9582.68,
+      "drawdown_pct": 4.26
+    },
+    {
+      "timestamp": "2026-10-14 17:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9589.09,
+      "drawdown_pct": 4.19
+    },
+    {
+      "timestamp": "2026-10-14 17:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9600.75,
+      "drawdown_pct": 4.08
+    },
+    {
+      "timestamp": "2026-10-14 17:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9619.51,
+      "drawdown_pct": 3.89
+    },
+    {
+      "timestamp": "2026-10-14 18:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9611.62,
+      "drawdown_pct": 3.97
+    },
+    {
+      "timestamp": "2026-10-14 18:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9613.22,
+      "drawdown_pct": 3.95
+    },
+    {
+      "timestamp": "2026-10-14 18:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9619.62,
+      "drawdown_pct": 3.89
+    },
+    {
+      "timestamp": "2026-10-14 18:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9605.82,
+      "drawdown_pct": 4.03
+    },
+    {
+      "timestamp": "2026-10-14 19:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9598.27,
+      "drawdown_pct": 4.1
+    },
+    {
+      "timestamp": "2026-10-14 19:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9598.15,
+      "drawdown_pct": 4.1
+    },
+    {
+      "timestamp": "2026-10-14 19:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9603.88,
+      "drawdown_pct": 4.05
+    },
+    {
+      "timestamp": "2026-10-14 19:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9594.17,
+      "drawdown_pct": 4.14
+    },
+    {
+      "timestamp": "2026-10-14 20:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9583.33,
+      "drawdown_pct": 4.25
+    },
+    {
+      "timestamp": "2026-10-14 20:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9587.32,
+      "drawdown_pct": 4.21
+    },
+    {
+      "timestamp": "2026-10-14 20:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9602.42,
+      "drawdown_pct": 4.06
+    },
+    {
+      "timestamp": "2026-10-14 20:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9599.82,
+      "drawdown_pct": 4.09
+    },
+    {
+      "timestamp": "2026-10-14 21:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9601.82,
+      "drawdown_pct": 4.07
+    },
+    {
+      "timestamp": "2026-10-14 21:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9592.05,
+      "drawdown_pct": 4.16
+    },
+    {
+      "timestamp": "2026-10-14 21:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9595.0,
+      "drawdown_pct": 4.13
+    },
+    {
+      "timestamp": "2026-10-14 21:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9600.37,
+      "drawdown_pct": 4.08
+    },
+    {
+      "timestamp": "2026-10-14 22:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9605.42,
+      "drawdown_pct": 4.03
+    },
+    {
+      "timestamp": "2026-10-14 22:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9616.77,
+      "drawdown_pct": 3.92
+    },
+    {
+      "timestamp": "2026-10-14 22:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9629.65,
+      "drawdown_pct": 3.79
+    },
+    {
+      "timestamp": "2026-10-14 22:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9612.22,
+      "drawdown_pct": 3.96
+    },
+    {
+      "timestamp": "2026-10-14 23:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9607.42,
+      "drawdown_pct": 4.01
+    },
+    {
+      "timestamp": "2026-10-14 23:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9624.22,
+      "drawdown_pct": 3.84
+    },
+    {
+      "timestamp": "2026-10-14 23:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9617.62,
+      "drawdown_pct": 3.91
+    },
+    {
+      "timestamp": "2026-10-14 23:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9610.02,
+      "drawdown_pct": 3.98
+    },
+    {
+      "timestamp": "2026-10-15 00:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9596.68,
+      "drawdown_pct": 4.12
+    },
+    {
+      "timestamp": "2026-10-15 00:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9600.31,
+      "drawdown_pct": 4.08
+    },
+    {
+      "timestamp": "2026-10-15 00:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9623.7,
+      "drawdown_pct": 3.85
+    },
+    {
+      "timestamp": "2026-10-15 00:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9612.62,
+      "drawdown_pct": 3.96
+    },
+    {
+      "timestamp": "2026-10-15 01:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9605.27,
+      "drawdown_pct": 4.03
+    },
+    {
+      "timestamp": "2026-10-15 01:15:00+00:00",
+      "balance": 9615.83,
+      "equity": 9619.22,
+      "drawdown_pct": 3.89
+    },
+    {
+      "timestamp": "2026-10-15 01:30:00+00:00",
+      "balance": 9615.83,
+      "equity": 9593.42,
+      "drawdown_pct": 4.15
+    },
+    {
+      "timestamp": "2026-10-15 01:45:00+00:00",
+      "balance": 9615.83,
+      "equity": 9614.22,
+      "drawdown_pct": 3.94
+    },
+    {
+      "timestamp": "2026-10-15 02:00:00+00:00",
+      "balance": 9615.83,
+      "equity": 9632.42,
+      "drawdown_pct": 3.76
+    },
+    {
+      "timestamp": "2026-10-15 02:15:00+00:00",
+      "balance": 9702.97,
+      "equity": 9702.97,
+      "drawdown_pct": 3.06
+    },
+    {
+      "timestamp": "2026-10-15 02:30:00+00:00",
+      "balance": 9702.97,
+      "equity": 9702.97,
+      "drawdown_pct": 3.06
+    },
+    {
+      "timestamp": "2026-10-15 02:45:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 03:00:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 03:15:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 03:30:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 03:45:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 04:00:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 04:15:00+00:00",
+      "balance": 9647.25,
+      "equity": 9647.25,
+      "drawdown_pct": 3.61
+    },
+    {
+      "timestamp": "2026-10-15 04:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.4,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 04:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.4,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 05:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.4,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 05:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.4,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 05:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.4,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 05:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9639.08,
+      "drawdown_pct": 3.69
+    },
+    {
+      "timestamp": "2026-10-15 06:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9620.3,
+      "drawdown_pct": 3.88
+    },
+    {
+      "timestamp": "2026-10-15 06:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9601.25,
+      "drawdown_pct": 4.07
+    },
+    {
+      "timestamp": "2026-10-15 06:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9603.25,
+      "drawdown_pct": 4.05
+    },
+    {
+      "timestamp": "2026-10-15 06:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9608.96,
+      "drawdown_pct": 4.0
+    },
+    {
+      "timestamp": "2026-10-15 07:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9601.9,
+      "drawdown_pct": 4.07
+    },
+    {
+      "timestamp": "2026-10-15 07:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9582.8,
+      "drawdown_pct": 4.26
+    },
+    {
+      "timestamp": "2026-10-15 07:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9556.47,
+      "drawdown_pct": 4.52
+    },
+    {
+      "timestamp": "2026-10-15 07:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9544.12,
+      "drawdown_pct": 4.64
+    },
+    {
+      "timestamp": "2026-10-15 08:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9566.56,
+      "drawdown_pct": 4.42
+    },
+    {
+      "timestamp": "2026-10-15 08:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9569.39,
+      "drawdown_pct": 4.39
+    },
+    {
+      "timestamp": "2026-10-15 08:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9573.91,
+      "drawdown_pct": 4.35
+    },
+    {
+      "timestamp": "2026-10-15 08:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9560.23,
+      "drawdown_pct": 4.48
+    },
+    {
+      "timestamp": "2026-10-15 09:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9557.35,
+      "drawdown_pct": 4.51
+    },
+    {
+      "timestamp": "2026-10-15 09:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9569.45,
+      "drawdown_pct": 4.39
+    },
+    {
+      "timestamp": "2026-10-15 09:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9572.05,
+      "drawdown_pct": 4.36
+    },
+    {
+      "timestamp": "2026-10-15 09:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9571.75,
+      "drawdown_pct": 4.37
+    },
+    {
+      "timestamp": "2026-10-15 10:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9588.69,
+      "drawdown_pct": 4.2
+    },
+    {
+      "timestamp": "2026-10-15 10:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9596.83,
+      "drawdown_pct": 4.12
+    },
+    {
+      "timestamp": "2026-10-15 10:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9607.67,
+      "drawdown_pct": 4.01
+    },
+    {
+      "timestamp": "2026-10-15 10:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9593.87,
+      "drawdown_pct": 4.15
+    },
+    {
+      "timestamp": "2026-10-15 11:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9593.82,
+      "drawdown_pct": 4.15
+    },
+    {
+      "timestamp": "2026-10-15 11:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9593.17,
+      "drawdown_pct": 4.15
+    },
+    {
+      "timestamp": "2026-10-15 11:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9586.45,
+      "drawdown_pct": 4.22
+    },
+    {
+      "timestamp": "2026-10-15 11:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9600.25,
+      "drawdown_pct": 4.08
+    },
+    {
+      "timestamp": "2026-10-15 12:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9598.65,
+      "drawdown_pct": 4.1
+    },
+    {
+      "timestamp": "2026-10-15 12:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9590.62,
+      "drawdown_pct": 4.18
+    },
+    {
+      "timestamp": "2026-10-15 12:30:00+00:00",
+      "balance": 9588.4,
+      "equity": 9609.05,
+      "drawdown_pct": 3.99
+    },
+    {
+      "timestamp": "2026-10-15 12:45:00+00:00",
+      "balance": 9588.4,
+      "equity": 9643.04,
+      "drawdown_pct": 3.65
+    },
+    {
+      "timestamp": "2026-10-15 13:00:00+00:00",
+      "balance": 9588.4,
+      "equity": 9643.67,
+      "drawdown_pct": 3.65
+    },
+    {
+      "timestamp": "2026-10-15 13:15:00+00:00",
+      "balance": 9588.4,
+      "equity": 9674.58,
+      "drawdown_pct": 3.34
+    },
+    {
+      "timestamp": "2026-10-15 13:30:00+00:00",
+      "balance": 9681.12,
+      "equity": 9681.12,
+      "drawdown_pct": 3.27
+    },
+    {
+      "timestamp": "2026-10-15 13:45:00+00:00",
+      "balance": 9634.13,
+      "equity": 9634.13,
+      "drawdown_pct": 3.74
+    },
+    {
+      "timestamp": "2026-10-15 14:00:00+00:00",
+      "balance": 9582.74,
+      "equity": 9582.74,
+      "drawdown_pct": 4.26
+    },
+    {
+      "timestamp": "2026-10-15 14:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 14:30:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 14:45:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 15:00:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 15:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 15:30:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 15:45:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 16:00:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 16:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 16:30:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 16:45:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 17:00:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 17:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 17:30:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 17:45:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 18:00:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 18:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 18:30:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 18:45:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 19:00:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-15 19:15:00+00:00",
+      "balance": 9524.1,
+      "equity": 9524.1,
+      "drawdown_pct": 4.84
+    },
+    {
+      "timestamp": "2026-10-16 08:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 08:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 08:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 09:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 09:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 09:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 09:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 10:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 10:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 10:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 10:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 11:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 11:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 11:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 11:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 12:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 12:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 12:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 12:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 13:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 13:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 13:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 13:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 14:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 14:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 14:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 14:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 15:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 15:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 15:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 15:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 16:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 16:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 16:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 16:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 17:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 17:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 17:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 17:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 18:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 18:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 18:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 18:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 19:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 19:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 19:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 19:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 20:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 20:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 20:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 20:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 21:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 21:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 21:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 21:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 22:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 22:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 22:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 22:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 23:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 23:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 23:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-16 23:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 00:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 00:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 00:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 00:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 01:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 01:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 01:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 01:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 02:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 02:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 02:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 02:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 03:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 03:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 03:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 03:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 04:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 04:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 04:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 04:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 05:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 05:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 05:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 05:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 06:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 06:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 06:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 06:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 07:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 07:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 07:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 07:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 08:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 08:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 08:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 08:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 09:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 09:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 09:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 09:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 10:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 10:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 10:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 10:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 11:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 11:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 11:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 11:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 12:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 12:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 12:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 12:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 13:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 13:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 13:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 13:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 14:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 14:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 14:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 14:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 15:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 15:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 15:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 15:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 16:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 16:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 16:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 16:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 17:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 17:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 17:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 17:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 18:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 18:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 18:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 18:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 19:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 19:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 19:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 19:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 20:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 20:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 20:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 20:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 21:00:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 21:15:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 21:30:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 21:45:00+00:00",
+      "balance": 10000.0,
+      "equity": 10000.0,
+      "drawdown_pct": 0.0
+    },
+    {
+      "timestamp": "2026-10-17 22:00:00+00:00",
+      "balance": 9972.96,
+      "equity": 9972.96,
+      "drawdown_pct": 0.27
+    },
+    {
+      "timestamp": "2026-10-17 22:15:00+00:00",
+      "balance": 9944.45,
+      "equity": 9944.45,
+      "drawdown_pct": 0.56
+    },
+    {
+      "timestamp": "2026-10-17 22:30:00+00:00",
+      "balance": 9944.45,
+      "equity": 9935.83,
+      "drawdown_pct": 0.64
+    },
+    {
+      "timestamp": "2026-10-17 22:45:00+00:00",
+      "balance": 9944.45,
+      "equity": 9942.17,
+      "drawdown_pct": 0.58
+    },
+    {
+      "timestamp": "2026-10-17 23:00:00+00:00",
+      "balance": 9944.45,
+      "equity": 9942.96,
+      "drawdown_pct": 0.57
+    },
+    {
+      "timestamp": "2026-10-17 23:15:00+00:00",
+      "balance": 9944.45,
+      "equity": 9949.28,
+      "drawdown_pct": 0.51
+    },
+    {
+      "timestamp": "2026-10-17 23:30:00+00:00",
+      "balance": 9944.45,
+      "equity": 9941.73,
+      "drawdown_pct": 0.58
+    },
+    {
+      "timestamp": "2026-10-17 23:45:00+00:00",
+      "balance": 9944.45,
+      "equity": 9928.66,
+      "drawdown_pct": 0.71
+    },
+    {
+      "timestamp": "2026-10-18 00:00:00+00:00",
+      "balance": 9944.45,
+      "equity": 9930.56,
+      "drawdown_pct": 0.69
+    },
+    {
+      "timestamp": "2026-10-18 00:15:00+00:00",
+      "balance": 9944.45,
+      "equity": 9933.47,
+      "drawdown_pct": 0.67
+    },
+    {
+      "timestamp": "2026-10-18 00:30:00+00:00",
+      "balance": 9944.45,
+      "equity": 9929.83,
+      "drawdown_pct": 0.7
+    },
+    {
+      "timestamp": "2026-10-18 00:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 01:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 01:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 01:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 01:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 02:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 02:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 02:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 02:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 03:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 03:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 03:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 03:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 04:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 04:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 04:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 04:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 05:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 05:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 05:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 05:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 06:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 06:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 06:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 06:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 07:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 07:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 07:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 07:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 08:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 08:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 08:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 08:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 09:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 09:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 09:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 09:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 10:00:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 10:15:00+00:00",
+      "balance": 9914.74,
+      "equity": 9914.74,
+      "drawdown_pct": 0.85
+    },
+    {
+      "timestamp": "2026-10-18 10:30:00+00:00",
+      "balance": 9914.74,
+      "equity": 9911.19,
+      "drawdown_pct": 0.89
+    },
+    {
+      "timestamp": "2026-10-18 10:45:00+00:00",
+      "balance": 9914.74,
+      "equity": 9901.52,
+      "drawdown_pct": 0.98
+    },
+    {
+      "timestamp": "2026-10-18 11:00:00+00:00",
+      "balance": 9889.72,
+      "equity": 9889.72,
+      "drawdown_pct": 1.1
+    },
+    {
+      "timestamp": "2026-10-18 11:15:00+00:00",
+      "balance": 9889.72,
+      "equity": 9889.0,
+      "drawdown_pct": 1.11
+    },
+    {
+      "timestamp": "2026-10-18 11:30:00+00:00",
+      "balance": 9889.72,
+      "equity": 9881.6,
+      "drawdown_pct": 1.18
+    },
+    {
+      "timestamp": "2026-10-18 11:45:00+00:00",
+      "balance": 9889.72,
+      "equity": 9885.57,
+      "drawdown_pct": 1.14
+    },
+    {
+      "timestamp": "2026-10-18 12:00:00+00:00",
+      "balance": 9889.72,
+      "equity": 9884.35,
+      "drawdown_pct": 1.16
+    },
+    {
+      "timestamp": "2026-10-18 12:15:00+00:00",
+      "balance": 9889.72,
+      "equity": 9881.59,
+      "drawdown_pct": 1.18
+    },
+    {
+      "timestamp": "2026-10-18 12:30:00+00:00",
+      "balance": 9865.3,
+      "equity": 9865.3,
+      "drawdown_pct": 1.35
+    },
+    {
+      "timestamp": "2026-10-18 12:45:00+00:00",
+      "balance": 9865.3,
+      "equity": 9858.81,
+      "drawdown_pct": 1.41
+    },
+    {
+      "timestamp": "2026-10-18 13:00:00+00:00",
+      "balance": 9865.3,
+      "equity": 9851.86,
+      "drawdown_pct": 1.48
+    },
+    {
+      "timestamp": "2026-10-18 13:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 13:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 13:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 14:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 14:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 14:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 14:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 15:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 15:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 15:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 15:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 16:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 16:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 16:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 16:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 17:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9842.71,
+      "drawdown_pct": 1.57
+    },
+    {
+      "timestamp": "2026-10-18 17:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9831.69,
+      "drawdown_pct": 1.68
+    },
+    {
+      "timestamp": "2026-10-18 17:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9833.45,
+      "drawdown_pct": 1.67
+    },
+    {
+      "timestamp": "2026-10-18 17:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9829.6,
+      "drawdown_pct": 1.7
+    },
+    {
+      "timestamp": "2026-10-18 18:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9830.68,
+      "drawdown_pct": 1.69
+    },
+    {
+      "timestamp": "2026-10-18 18:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9831.85,
+      "drawdown_pct": 1.68
+    },
+    {
+      "timestamp": "2026-10-18 18:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9835.38,
+      "drawdown_pct": 1.65
+    },
+    {
+      "timestamp": "2026-10-18 18:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9829.58,
+      "drawdown_pct": 1.7
+    },
+    {
+      "timestamp": "2026-10-18 19:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9832.95,
+      "drawdown_pct": 1.67
+    },
+    {
+      "timestamp": "2026-10-18 19:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9841.9,
+      "drawdown_pct": 1.58
+    },
+    {
+      "timestamp": "2026-10-18 19:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9864.29,
+      "drawdown_pct": 1.36
+    },
+    {
+      "timestamp": "2026-10-18 19:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9860.99,
+      "drawdown_pct": 1.39
+    },
+    {
+      "timestamp": "2026-10-18 20:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9862.19,
+      "drawdown_pct": 1.38
+    },
+    {
+      "timestamp": "2026-10-18 20:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9854.65,
+      "drawdown_pct": 1.45
+    },
+    {
+      "timestamp": "2026-10-18 20:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9864.28,
+      "drawdown_pct": 1.36
+    },
+    {
+      "timestamp": "2026-10-18 20:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9852.68,
+      "drawdown_pct": 1.47
+    },
+    {
+      "timestamp": "2026-10-18 21:00:00+00:00",
+      "balance": 9842.71,
+      "equity": 9844.87,
+      "drawdown_pct": 1.55
+    },
+    {
+      "timestamp": "2026-10-18 21:15:00+00:00",
+      "balance": 9842.71,
+      "equity": 9849.51,
+      "drawdown_pct": 1.5
+    },
+    {
+      "timestamp": "2026-10-18 21:30:00+00:00",
+      "balance": 9842.71,
+      "equity": 9835.07,
+      "drawdown_pct": 1.65
+    },
+    {
+      "timestamp": "2026-10-18 21:45:00+00:00",
+      "balance": 9842.71,
+      "equity": 9826.76,
+      "drawdown_pct": 1.73
+    },
+    {
+      "timestamp": "2026-10-18 22:00:00+00:00",
+      "balance": 9813.17,
+      "equity": 9813.17,
+      "drawdown_pct": 1.87
+    },
+    {
+      "timestamp": "2026-10-18 22:15:00+00:00",
+      "balance": 9813.17,
+      "equity": 9813.17,
+      "drawdown_pct": 1.87
+    }
+  ],
+  "assumptions": {
+    "initial_balance_usd": 10000.0,
+    "fixed_lot_btc": 0.1,
+    "spread_usd": 15.0,
+    "slippage_usd": 10.0,
+    "commission_pct": 0.0004,
+    "use_regime_filter": true,
+    "use_advisory_filter": true,
+    "in_sample_bars": 699,
+    "out_of_sample_bars": 300
+  },
+  "reproducible_hash": "d6afbaef5ef5"
+}
