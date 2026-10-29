@@ -28,14 +28,14 @@ logger = logging.getLogger("Trade2Options.Research.Orchestrator")
 
 
 class ResearchOrchestrator:
-    def __init__(self, artifacts_dir: Optional[str] = None):
+    def __init__(self, artifacts_dir: Optional[str] = None, data_service: Optional[MarketDataService] = None):
         if artifacts_dir is None:
             self.artifacts_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "artifacts"))
         else:
             self.artifacts_dir = artifacts_dir
 
         os.makedirs(self.artifacts_dir, exist_ok=True)
-        self.data_service = MarketDataService()
+        self.data_service = data_service or MarketDataService()
 
         # Initialize adapters
         self.kronos_adapter = KronosResearchAdapter()
@@ -65,7 +65,7 @@ class ResearchOrchestrator:
         2. Candidate A: Primary Trend + Regime Engine Filter (Blocks Choppy/Shock regimes)
         3. Candidate B: Primary Trend + Regime Engine + Advisory EMA 9/21 Timing Filter
         """
-        snapshot = self.data_service.get_market_data(symbol=symbol, timeframe=timeframe, limit=1000, force_refresh=True)
+        snapshot = self.data_service.get_market_data(symbol=symbol, timeframe=timeframe, limit=250, force_refresh=False)
         if not snapshot.is_data_available or snapshot.candles_count < 80:
             raise RuntimeError(f"Insufficient market data to conduct backtest: {snapshot.error_message}")
 

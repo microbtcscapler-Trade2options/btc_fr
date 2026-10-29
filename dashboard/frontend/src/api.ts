@@ -15,7 +15,7 @@ import {
   MasterSignalSnapshot
 } from './types';
 
-const API_BASE = '/api';
+const API_BASE = (import.meta as any).env?.VITE_API_URL || '/api';
 
 export async function fetchMarketCandles(symbol = 'BTCUSDT', timeframe: TimeFrame = '15m', limit = 150): Promise<MarketDataSnapshot> {
   const res = await fetch(`${API_BASE}/market/candles?symbol=${symbol}&timeframe=${timeframe}&limit=${limit}`);

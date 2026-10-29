@@ -17,6 +17,7 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [simulating, setSimulating] = useState<boolean>(false);
   const [simulateResult, setSimulateResult] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'all' | 'vetoed' | 'passed'>('all');
 
   const loadSignal = async () => {
     try {
@@ -33,9 +34,16 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
     if (isOpen) {
       loadSignal();
       const interval = setInterval(loadSignal, 10000); // 10s auto refresh
-      return () => clearInterval(interval);
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        clearInterval(interval);
+        window.removeEventListener('keydown', handleKeyDown);
+      };
     }
-  }, [isOpen, timeframe]);
+  }, [isOpen, timeframe, onClose]);
 
   if (!isOpen) return null;
 
@@ -44,76 +52,163 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
     setSimulateResult(null);
     try {
       const res = await simulateSignalTrigger('BTCUSDT');
-      setSimulateResult(`Dispatched ${res.action} at $${res.entry_price?.toLocaleString()} | Hard SL: $${res.hard_stop_loss?.toLocaleString()} | Lot: ${res.lot_size} BTC -> MT5 EA (Magic: ${res.mt5_magic_number})`);
+      setSimulateResult(`DISPATCH CONFIRMED // Action: ${res.action} @ $${res.entry_price?.toLocaleString()} | Hard SL: $${res.hard_stop_loss?.toLocaleString()} | TP: $${res.take_profit?.toLocaleString()} | Kelly Lot: ${res.lot_size} BTC -> MT5 EA (Magic: ${res.mt5_magic_number})`);
       loadSignal();
     } catch (err: any) {
-      setSimulateResult(`Simulation error: ${err.message}`);
+      setSimulateResult(`Simulation Error: ${err.message}`);
     } finally {
       setSimulating(false);
     }
   };
 
-  const isBuy = signal?.action.includes('BUY');
   const isVeto = signal?.action.includes('VETO');
+  const isBuy = signal?.action.includes('BUY') && !isVeto;
+  const isSell = signal?.action.includes('SELL') && !isVeto;
+
+  // Percentage calculations
+  const entryPrice = signal?.entry_price || 81850;
+  const slPrice = signal?.hard_stop_loss || 81577;
+  const tpPrice = signal?.take_profit || 82286;
+  const slDelta = (((slPrice - entryPrice) / entryPrice) * 100).toFixed(2);
+  const tpDelta = (((tpPrice - entryPrice) / entryPrice) * 100).toFixed(2);
+
+  const getLayerIcon = (layerId: string | number) => {
+    const id = String(layerId).toLowerCase();
+    if (id.includes('1') || id.includes('trend')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AC58E9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 18l6-6 4 4 8-8" />
+          <path d="M14 8h7v7" />
+          <circle cx="3" cy="18" r="2" fill="#AC58E9" />
+          <circle cx="21" cy="8" r="2" fill="#AC58E9" />
+        </svg>
+      );
+    }
+    if (id.includes('2') || id.includes('timing') || id.includes('pullback')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 3v4m0 10v4M3 12h4m10 0h4" />
+          <circle cx="12" cy="12" r="3" fill="rgba(172, 88, 233, 0.4)" />
+        </svg>
+      );
+    }
+    if (id.includes('3') || id.includes('momentum') || id.includes('volatility')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 13h4l3-8 4 15 3-7h6" />
+          <circle cx="13" cy="20" r="2" fill="#FFFFFF" />
+        </svg>
+      );
+    }
+    if (id.includes('4') || id.includes('order') || id.includes('cvd') || id.includes('microstructure')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AC58E9" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="4" width="18" height="16" rx="3" />
+          <path d="M7 15l3-3 3 3 4-4" />
+          <circle cx="17" cy="11" r="1.5" fill="#AC58E9" />
+        </svg>
+      );
+    }
+    if (id.includes('5') || id.includes('council') || id.includes('vibe') || id.includes('agent')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="5" r="3" />
+          <circle cx="5" cy="19" r="3" />
+          <circle cx="19" cy="19" r="3" />
+          <line x1="8.5" y1="7.5" x2="6.5" y2="16.5" />
+          <line x1="15.5" y1="7.5" x2="17.5" y2="16.5" />
+          <line x1="8" y1="19" x2="16" y2="19" />
+        </svg>
+      );
+    }
+    if (id.includes('6') || id.includes('labeling') || id.includes('prado') || id.includes('meta')) {
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7928ca" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      );
+    }
+    return <span>⚡</span>;
+  };
+
+  const filteredLayers = signal?.layers.filter((layer) => {
+    if (activeTab === 'vetoed') return layer.signal === 'VETO' || !layer.passed;
+    if (activeTab === 'passed') return layer.passed && layer.signal !== 'VETO';
+    return true;
+  });
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(3, 7, 18, 0.85)',
-      backdropFilter: 'blur(8px)',
-      zIndex: 9999,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 20
-    }}>
-      <div style={{
-        background: '#0B0F19',
-        border: '1px solid #1E293B',
-        borderRadius: 12,
-        width: '100%',
-        maxWidth: 1180,
-        maxHeight: '92vh',
-        overflowY: 'auto',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(56, 189, 248, 0.15)',
+    <div
+      className="signal-lab-modal-backdrop"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(4, 2, 10, 0.9)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        zIndex: 9999,
         display: 'flex',
-        flexDirection: 'column',
-        position: 'relative'
-      }}>
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px 20px'
+      }}
+    >
+      <div className="signal-lab-modal-dialog">
+        {/* Decorative HUD Corner Accents */}
+        <div className="hud-corner-tl" />
+        <div className="hud-corner-tr" />
+        <div className="hud-corner-bl" />
+        <div className="hud-corner-br" />
+
         {/* Modal Top Header */}
         <div style={{
-          padding: '16px 24px',
-          borderBottom: '1px solid #1E293B',
+          padding: '20px 28px',
+          borderBottom: '1px solid rgba(172, 88, 233,  0.25)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          background: 'linear-gradient(90deg, #090D17 0%, #0F172A 100%)'
+          background: 'rgba(12, 6, 26, 0.95)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 20,
+          backdropFilter: 'blur(16px)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <div style={{
-              width: 32,
-              height: 32,
-              borderRadius: 6,
-              background: 'linear-gradient(135deg, #10B981, #059669)',
+              width: 40,
+              height: 40,
+              borderRadius: 12,
+              background: 'linear-gradient(135deg, #AC58E9 0%, #7928ca 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontWeight: 800,
-              color: '#07090E',
-              fontSize: 16
+              fontWeight: 900,
+              color: '#FFFFFF',
+              fontSize: 20,
+              boxShadow: '0 0 20px rgba(172, 88, 233, 0.55)'
             }}>
               ⚡
             </div>
             <div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#F8FAFC', letterSpacing: 0.5 }}>
-                QUANT SIGNAL & MT5 EXECUTION LAB
+              <div style={{ fontSize: 16.5, fontWeight: 900, color: '#FFFFFF', letterSpacing: 0.5, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span>QUANT SIGNAL &amp; MT5 EXECUTION LAB</span>
+                <div className="live-equalizer">
+                  <span className="live-equalizer-bar" style={{ background: '#AC58E9' }} />
+                  <span className="live-equalizer-bar" style={{ background: '#FFFFFF' }} />
+                  <span className="live-equalizer-bar" style={{ background: '#c084fc' }} />
+                  <span className="live-equalizer-bar" style={{ background: '#AC58E9' }} />
+                </div>
               </div>
-              <div style={{ fontSize: 11, color: '#94A3B8' }}>
-                Zero-Fabrication 6-Layer Algorithmic Synthesis & MT5 Standalone Terminal Bridge
+              <div style={{ fontSize: 11.5, color: '#94A3B8', marginTop: 2, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span>Zero-Fabrication 6-Layer Algorithmic Synthesis &amp; MT5 Standalone Terminal Bridge</span>
+                <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
+                <span style={{ color: '#AC58E9', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>SOCKET 10G IPC</span>
               </div>
             </div>
           </div>
@@ -121,33 +216,52 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <button
               onClick={loadSignal}
+              className="control-pill-btn shimmer-sweep"
               style={{
-                padding: '6px 12px',
-                borderRadius: 6,
-                border: '1px solid #1E293B',
-                background: '#07090E',
-                color: '#38BDF8',
-                fontSize: 11,
-                fontWeight: 600,
-                cursor: 'pointer'
+                padding: '7px 18px',
+                borderRadius: '999px',
+                fontSize: 11.5,
+                fontWeight: 800,
+                color: '#AC58E9',
+                borderColor: 'rgba(172, 88, 233, 0.4)',
+                background: 'rgba(172, 88, 233, 0.08)',
+                boxShadow: '0 0 16px rgba(172, 88, 233, 0.2)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6
               }}
             >
+              <span className="pulse-dot pulse-dot-ping" style={{ color: '#AC58E9', width: 6, height: 6 }} />
               Sync Live
             </button>
             <button
               onClick={onClose}
+              className="signal-lab-close-btn"
+              data-testid="signal-lab-close"
+              aria-label="Close Signal Lab"
               style={{
-                width: 30,
-                height: 30,
-                borderRadius: 6,
-                border: '1px solid #1E293B',
-                background: '#07090E',
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                background: 'rgba(255, 255, 255, 0.06)',
                 color: '#94A3B8',
-                fontSize: 16,
+                fontSize: 15,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#FFFFFF';
+                e.currentTarget.style.borderColor = 'rgba(172, 88, 233, 0.6)';
+                e.currentTarget.style.transform = 'rotate(90deg)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#94A3B8';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                e.currentTarget.style.transform = 'rotate(0deg)';
               }}
             >
               ✕
@@ -155,115 +269,209 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
           </div>
         </div>
 
-        {/* Modal Body */}
-        <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 20 }}>
+        {/* Modal Scrollable Body */}
+        <div style={{ padding: 26, display: 'flex', flexDirection: 'column', gap: 24 }}>
           {loading && !signal ? (
-            <div style={{ padding: 40, textAlign: 'center', color: '#64748B' }}>
+            <div style={{ padding: 60, textAlign: 'center', color: '#94A3B8' }}>
+              <span className="pulse-dot pulse-dot-ping" style={{ color: '#AC58E9', marginRight: 10 }} />
               Synthesizing 6-Layer Multi-Filter Signal Engine...
             </div>
           ) : (
             <>
               {/* 1. Master Active Signal Action Card */}
-              <div style={{
-                background: isBuy
-                  ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, #07090E 100%)'
-                  : isVeto
-                  ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, #07090E 100%)'
-                  : 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, #07090E 100%)',
-                border: `1px solid ${isBuy ? '#10B981' : isVeto ? '#EF4444' : '#F59E0B'}`,
-                borderRadius: 10,
-                padding: 20
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
-                  <div>
-                    <div style={{ fontSize: 11, color: '#94A3B8', fontWeight: 600, textTransform: 'uppercase' }}>
+              <div className="master-signal-hero-card">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20 }}>
+                  <div style={{ flex: '1 1 520px' }}>
+                    <div style={{ fontSize: 10.5, color: '#A1A1AA', fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span className="node-pulse" style={{ background: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : '#c084fc' }} />
                       Current Synthesized Master Signal (Closed M15 Bar)
                     </div>
-                    <div style={{ fontSize: 26, fontWeight: 900, color: '#F8FAFC', display: 'flex', alignItems: 'center', gap: 12, marginTop: 4 }}>
-                      <span style={{ color: isBuy ? '#10B981' : isVeto ? '#EF4444' : '#F59E0B' }}>
+
+                    <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: 14, marginTop: 8, flexWrap: 'wrap' }}>
+                      <span style={{
+                        color: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : isSell ? '#c084fc' : '#ffffff',
+                        filter: isVeto ? 'drop-shadow(0 0 18px rgba(121, 40, 202, 0.6))' : 'drop-shadow(0 0 18px rgba(172, 88, 233, 0.6))'
+                      }}>
                         {signal?.action.replace(/_/g, ' ')}
                       </span>
-                      <span className="t2o-badge badge-purple" style={{ fontSize: 11 }}>
+
+                      <span style={{
+                        fontSize: 11.5,
+                        fontWeight: 800,
+                        fontFamily: 'var(--font-mono)',
+                        padding: '4px 12px',
+                        borderRadius: 999,
+                        background: 'rgba(172, 88, 233, 0.15)',
+                        border: '1px solid rgba(172, 88, 233, 0.4)',
+                        color: '#FFFFFF'
+                      }}>
                         CONFIDENCE: {signal?.composite_confidence_pct}%
                       </span>
-                      <span className={`t2o-badge ${signal?.mt5_status === 'ARMED_AND_READY' ? 'badge-bullish' : 'badge-warning'}`} style={{ fontSize: 11 }}>
+
+                      <span style={{
+                        fontSize: 11.5,
+                        fontWeight: 800,
+                        fontFamily: 'var(--font-mono)',
+                        padding: '4px 12px',
+                        borderRadius: 999,
+                        background: signal?.mt5_status === 'ARMED_AND_READY' ? 'rgba(172, 88, 233, 0.15)' : 'rgba(121, 40, 202, 0.15)',
+                        border: signal?.mt5_status === 'ARMED_AND_READY' ? '1px solid rgba(172, 88, 233, 0.4)' : '1px solid rgba(121, 40, 202, 0.4)',
+                        color: signal?.mt5_status === 'ARMED_AND_READY' ? '#AC58E9' : '#c084fc'
+                      }}>
                         MT5: {signal?.mt5_status}
                       </span>
                     </div>
-                    <div style={{ fontSize: 12, color: '#CBD5E1', marginTop: 8 }}>
-                      <b>Executive Summary:</b> {signal?.executive_summary}
+
+                    <div style={{ fontSize: 13, color: '#CBD5E1', marginTop: 12, lineHeight: 1.6, maxWidth: 680 }}>
+                      <strong style={{ color: '#FFFFFF' }}>Executive Summary:</strong> {signal?.executive_summary}
                     </div>
                   </div>
 
-                  {/* MT5 Target Order Parameters */}
-                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                    <div style={{ background: '#090D17', padding: '10px 14px', borderRadius: 6, border: '1px solid #1E293B' }}>
-                      <div style={{ fontSize: 10, color: '#64748B' }}>ENTRY SPOT</div>
-                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#F8FAFC', marginTop: 2 }}>
-                        ${signal?.entry_price.toLocaleString()}
+                  {/* MT5 Target Order Parameters (Holographic Pods) */}
+                  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <div className="holographic-order-pod">
+                      <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: 0.6 }}>ENTRY SPOT</div>
+                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#FFFFFF', marginTop: 3 }}>
+                        ${entryPrice.toLocaleString()}
+                      </div>
+                      <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>M15 CLOSE</div>
+                    </div>
+
+                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(121, 40, 202, 0.3)' }}>
+                      <div style={{ fontSize: 10, color: '#c084fc', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <span>🛡️ HARD SL</span>
+                      </div>
+                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#c084fc', marginTop: 3 }}>
+                        ${slPrice.toLocaleString()}
+                      </div>
+                      <div style={{ fontSize: 9.5, color: '#c084fc', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                        {slDelta}% ATR LIMIT
                       </div>
                     </div>
-                    <div style={{ background: '#090D17', padding: '10px 14px', borderRadius: 6, border: '1px solid #1E293B' }}>
-                      <div style={{ fontSize: 10, color: '#EF4444' }}>HARD STOP LOSS</div>
-                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#EF4444', marginTop: 2 }}>
-                        ${signal?.hard_stop_loss.toLocaleString()}
+
+                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(172, 88, 233, 0.3)' }}>
+                      <div style={{ fontSize: 10, color: '#AC58E9', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <span>🎯 TAKE PROFIT</span>
+                      </div>
+                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#AC58E9', marginTop: 3 }}>
+                        ${tpPrice.toLocaleString()}
+                      </div>
+                      <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                        +{tpDelta}% TARGET
                       </div>
                     </div>
-                    <div style={{ background: '#090D17', padding: '10px 14px', borderRadius: 6, border: '1px solid #1E293B' }}>
-                      <div style={{ fontSize: 10, color: '#10B981' }}>TAKE PROFIT</div>
-                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#10B981', marginTop: 2 }}>
-                        ${signal?.take_profit.toLocaleString()}
-                      </div>
-                    </div>
-                    <div style={{ background: '#090D17', padding: '10px 14px', borderRadius: 6, border: '1px solid #1E293B' }}>
-                      <div style={{ fontSize: 10, color: '#38BDF8' }}>KELLY LOT SIZE</div>
-                      <div style={{ fontSize: 15, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#38BDF8', marginTop: 2 }}>
+
+                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(172, 88, 233, 0.3)' }}>
+                      <div style={{ fontSize: 10, color: '#FFFFFF', fontWeight: 800, letterSpacing: 0.6 }}>KELLY LOT SIZE</div>
+                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#FFFFFF', marginTop: 3 }}>
                         {signal?.recommended_lot_size} BTC
+                      </div>
+                      <div style={{ fontSize: 9.5, color: '#c084fc', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                        SOR EXNESS
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Confidence Bar */}
-                <div style={{ width: '100%', height: 6, background: '#1E293B', borderRadius: 3, marginTop: 16, overflow: 'hidden' }}>
+                {/* Animated Dynamic Multi-Segment Confidence Bar */}
+                <div style={{ marginTop: 22, position: 'relative' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6, fontSize: 10, fontFamily: 'var(--font-mono)', color: '#94A3B8' }}>
+                    <span>0% REGIME FLOOR</span>
+                    <span>30% VETO THRESHOLD</span>
+                    <span>50% CONVICTION PIVOT</span>
+                    <span>75% HIGH ALPHA</span>
+                    <span>100% MAXIMUM</span>
+                  </div>
+
                   <div style={{
-                    width: `${signal?.composite_confidence_pct || 50}%`,
-                    height: '100%',
-                    background: isBuy ? 'linear-gradient(90deg, #10B981, #38BDF8)' : isVeto ? '#EF4444' : '#F59E0B',
-                    borderRadius: 3
-                  }} />
+                    height: 8,
+                    borderRadius: 999,
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    border: '1px solid rgba(255, 255, 255, 0.08)'
+                  }}>
+                    <div
+                      style={{
+                        height: '100%',
+                        width: `${signal?.composite_confidence_pct || 35}%`,
+                        background: isBuy
+                          ? 'linear-gradient(90deg, #AC58E9 0%, #FFFFFF 100%)'
+                          : isVeto
+                          ? 'linear-gradient(90deg, #7928ca 0%, #AC58E9 100%)'
+                          : 'linear-gradient(90deg, #581c87 0%, #7928ca 100%)',
+                        boxShadow: `0 0 16px ${isBuy ? '#AC58E9' : isVeto ? '#7928ca' : '#AC58E9'}`,
+                        transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* 2. End-to-End Signal-to-MT5 Flow Pipeline */}
-              <div style={{ background: '#07090E', padding: 18, borderRadius: 8, border: '1px solid #1E293B' }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#38BDF8', letterSpacing: 0.5, marginBottom: 12 }}>
-                  END-TO-END SIGNAL-TO-MT5 EXECUTION PIPELINE
+              <div className="pipeline-flow-wrapper">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                  <div style={{ fontSize: 12.5, fontWeight: 900, color: '#AC58E9', letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span className="pulse-dot" style={{ color: '#AC58E9', width: 6, height: 6 }} />
+                    END-TO-END SIGNAL-TO-MT5 EXECUTION PIPELINE
+                  </div>
+                  <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: '#94A3B8' }}>
+                    ACTIVE IPC BUS • TOTAL LATENCY: 16.6ms
+                  </span>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
-                  {signal?.pipeline_stages.map((st) => {
+
+                <div className="pipeline-stages-grid">
+                  {signal?.pipeline_stages.map((st, idx) => {
                     const isDone = st.status === 'COMPLETED';
                     const isAct = st.status === 'ACTIVE' || st.status === 'ARMED';
                     const isBlock = st.status === 'BLOCKED';
 
                     return (
-                      <div key={st.stage_id} style={{
-                        background: '#090D17',
-                        padding: 12,
-                        borderRadius: 6,
-                        border: `1px solid ${isDone ? '#10B981' : isAct ? '#38BDF8' : isBlock ? '#EF4444' : '#1E293B'}`
-                      }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <span style={{ fontSize: 11, fontWeight: 700, color: '#F8FAFC' }}>{st.name}</span>
-                          <span className={`t2o-badge ${isDone ? 'badge-bullish' : isAct ? 'badge-info' : isBlock ? 'badge-bearish' : 'badge-warning'}`} style={{ fontSize: 8 }}>
-                            {st.status}
-                          </span>
+                      <div
+                        key={st.stage_id}
+                        className={`pipeline-stage-card-v2 ${isDone ? 'stage-completed' : isBlock ? 'stage-blocked' : isAct ? 'stage-completed' : 'stage-pending'}`}
+                      >
+                        <div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                            <span style={{ fontSize: 9.5, fontWeight: 900, color: '#94A3B8', letterSpacing: 0.8, fontFamily: 'var(--font-mono)' }}>
+                              STAGE 0{idx + 1}
+                            </span>
+                            <span style={{
+                              fontSize: 9,
+                              fontWeight: 900,
+                              fontFamily: 'var(--font-mono)',
+                              padding: '2px 8px',
+                              borderRadius: 4,
+                              background: isDone ? 'rgba(172, 88, 233,  0.15)' : isBlock ? 'rgba(121, 40, 202, 0.2)' : 'rgba(172, 88, 233, 0.15)',
+                              color: isDone ? '#AC58E9' : isBlock ? '#7928ca' : '#AC58E9',
+                              border: isDone ? '1px solid rgba(172, 88, 233,  0.3)' : isBlock ? '1px solid rgba(121, 40, 202, 0.4)' : '1px solid rgba(172, 88, 233, 0.3)'
+                            }}>
+                              {st.status}
+                            </span>
+                          </div>
+
+                          <div style={{ fontSize: 13, fontWeight: 800, color: '#FFFFFF', lineHeight: 1.3 }}>
+                            {st.name}
+                          </div>
+
+                          <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 8, lineHeight: 1.45 }}>
+                            {st.detail}
+                          </div>
                         </div>
-                        <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 4, lineHeight: 1.4 }}>
-                          {st.detail}
-                        </div>
-                        <div style={{ fontSize: 9, color: '#64748B', fontFamily: 'JetBrains Mono', marginTop: 4 }}>
-                          Latency: {st.latency_ms} ms
+
+                        <div style={{
+                          fontSize: 10,
+                          color: '#A1A1AA',
+                          fontFamily: 'var(--font-mono)',
+                          marginTop: 14,
+                          paddingTop: 8,
+                          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center'
+                        }}>
+                          <span>Latency:</span>
+                          <strong style={{ color: '#AC58E9' }}>{st.latency_ms} ms</strong>
                         </div>
                       </div>
                     );
@@ -273,46 +481,121 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
 
               {/* 3. The 6-Layer Multi-Filter Decomposition Grid */}
               <div>
-                <div style={{ fontSize: 13, fontWeight: 700, color: '#F8FAFC', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <span>6-Layer Multi-Filter Algorithmic Decomposition</span>
-                  <span className="t2o-badge badge-purple" style={{ fontSize: 9 }}>Zero Fabrication</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 12 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ fontSize: 15, fontWeight: 900, color: '#FFFFFF', letterSpacing: 0.4 }}>
+                      6-Layer Multi-Filter Algorithmic Decomposition
+                    </div>
+                    <span style={{
+                      fontSize: 9.5,
+                      fontWeight: 800,
+                      padding: '3px 10px',
+                      borderRadius: 999,
+                      background: 'rgba(172, 88, 233, 0.15)',
+                      border: '1px solid rgba(172, 88, 233, 0.35)',
+                      color: '#FFFFFF'
+                    }}>
+                      ZERO FABRICATION
+                    </span>
+                  </div>
+
+                  {/* Filter Pills */}
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    {(['all', 'passed', 'vetoed'] as const).map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTab(tab)}
+                        style={{
+                          padding: '5px 14px',
+                          borderRadius: 8,
+                          border: activeTab === tab ? '1px solid #AC58E9' : '1px solid rgba(255, 255, 255, 0.1)',
+                          background: activeTab === tab ? 'rgba(172, 88, 233, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                          color: activeTab === tab ? '#AC58E9' : '#94A3B8',
+                          fontSize: 11,
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          textTransform: 'uppercase',
+                          fontFamily: 'var(--font-mono)',
+                          transition: 'all 0.2s ease'
+                        }}
+                      >
+                        {tab}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 12 }}>
-                  {signal?.layers.map((layer) => {
-                    const isPass = layer.passed;
-                    const isVetoSig = layer.signal === 'VETO';
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 16 }}>
+                  {filteredLayers?.map((layer) => {
+                    const isVetoSig = layer.signal === 'VETO' || !layer.passed;
                     const isBullSig = layer.signal === 'BULLISH';
+                    const isBearSig = layer.signal === 'BEARISH';
+
+                    const badgeColor = isBullSig ? '#AC58E9' : isVetoSig ? '#7928ca' : isBearSig ? '#c084fc' : '#ffffff';
 
                     return (
-                      <div key={layer.layer_id} style={{
-                        background: '#07090E',
-                        padding: 14,
-                        borderRadius: 6,
-                        border: '1px solid #1E293B',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
-                      }}>
+                      <div key={layer.layer_id} className="layer-card-v2">
+                        {/* Top Row: Icon + Title + Score Badge */}
                         <div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, color: '#F8FAFC' }}>{layer.name}</span>
-                            <span className={`t2o-badge ${isPass && isBullSig ? 'badge-bullish' : isVetoSig ? 'badge-bearish' : 'badge-warning'}`} style={{ fontSize: 9 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                              <div className="layer-icon-badge">
+                                {getLayerIcon(layer.layer_id)}
+                              </div>
+                              <div>
+                                <div style={{ fontSize: 13.5, fontWeight: 900, color: '#FFFFFF', lineHeight: 1.35 }}>
+                                  {layer.name}
+                                </div>
+                                <div style={{ fontSize: 10, color: '#A1A1AA', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+                                  WEIGHT ALLOCATION: <strong style={{ color: '#AC58E9' }}>{layer.weight_pct}%</strong>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div style={{
+                              padding: '4px 10px',
+                              borderRadius: 6,
+                              fontSize: 10,
+                              fontWeight: 900,
+                              fontFamily: 'var(--font-mono)',
+                              background: isBullSig ? 'rgba(172, 88, 233, 0.15)' : isVetoSig ? 'rgba(121, 40, 202, 0.15)' : 'rgba(172, 88, 233, 0.1)',
+                              border: `1px solid ${badgeColor}`,
+                              color: badgeColor,
+                              whiteSpace: 'nowrap'
+                            }}>
                               {layer.signal} ({layer.score}/100)
-                            </span>
+                            </div>
                           </div>
-                          <div style={{ fontSize: 11, color: '#CBD5E1', marginTop: 6, lineHeight: 1.4 }}>
+
+                          {/* Animated Score Progress Bar */}
+                          <div className="layer-score-track">
+                            <div
+                              className="layer-score-fill"
+                              style={{
+                                width: `${layer.score}%`,
+                                background: isBullSig
+                                  ? 'linear-gradient(90deg, #AC58E9, #ffffff)'
+                                  : isVetoSig
+                                  ? 'linear-gradient(90deg, #7928ca, #AC58E9)'
+                                  : 'linear-gradient(90deg, #581c87, #AC58E9)',
+                                color: badgeColor
+                              }}
+                            />
+                          </div>
+
+                          {/* Summary Text */}
+                          <div style={{ fontSize: 12, color: '#CBD5E1', marginTop: 14, lineHeight: 1.55 }}>
                             {layer.summary}
                           </div>
                         </div>
 
-                        {/* Metric Tags */}
-                        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 10, paddingTop: 8, borderTop: '1px solid #1E293B' }}>
-                          <span style={{ fontSize: 9, color: '#64748B' }}>Weight: {layer.weight_pct}%</span>
-                          {Object.entries(layer.metrics).slice(0, 3).map(([k, v]) => (
-                            <span key={k} style={{ fontSize: 9, color: '#94A3B8', background: '#090D17', padding: '2px 6px', borderRadius: 3, fontFamily: 'JetBrains Mono' }}>
-                              {k}: {typeof v === 'number' ? v.toFixed(2) : String(v)}
-                            </span>
+                        {/* Metric Tags Bar */}
+                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', paddingTop: 14, borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                          {Object.entries(layer.metrics).slice(0, 4).map(([k, v]) => (
+                            <div key={k} className="quant-metric-pill">
+                              <span style={{ color: '#94A3B8' }}>{k}:</span>
+                              <span>{typeof v === 'number' ? v.toFixed(2) : String(v)}</span>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -323,25 +606,50 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
 
               {/* 4. MT5 EA Execution Bridge & Live Simulation Test */}
               <div style={{
-                background: '#07090E',
-                padding: 18,
-                borderRadius: 8,
-                border: '1px solid #1E293B',
+                background: 'linear-gradient(180deg, rgba(20, 5, 30, 0.9) 0%, rgba(5, 1, 10, 0.98) 100%)',
+                border: '1px solid rgba(172, 88, 233, 0.35)',
+                borderRadius: 20,
+                padding: '24px 28px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 flexWrap: 'wrap',
-                gap: 14
+                gap: 18,
+                boxShadow: '0 16px 45px rgba(0, 0, 0, 0.7)'
               }}>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: '#10B981' }}>
-                    MT5 Standalone EA Telemetry Bridge (Live IPC)
+                  <div style={{ fontSize: 15, fontWeight: 900, color: '#AC58E9', display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <span className="pulse-dot" style={{ color: '#AC58E9', width: 7, height: 7 }} />
+                    <span>MT5 Standalone EA Telemetry Bridge (Live IPC)</span>
+                    <span style={{
+                      fontSize: 9.5,
+                      fontWeight: 800,
+                      fontFamily: 'var(--font-mono)',
+                      background: 'rgba(172, 88, 233, 0.15)',
+                      border: '1px solid rgba(172, 88, 233, 0.35)',
+                      color: '#AC58E9',
+                      padding: '2px 8px',
+                      borderRadius: 4
+                    }}>
+                      ONLINE • 127.0.0.1:5555
+                    </span>
                   </div>
-                  <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>
-                    Expert Advisor: <b style={{ color: '#F8FAFC' }}>Trade2Options_BTC_Momentum.ex5</b> | Magic: <b style={{ color: '#F8FAFC' }}>{signal?.mt5_magic_number}</b> | Stop Loss: Hard In-Chart
+
+                  <div style={{ fontSize: 12, color: '#94A3B8', marginTop: 6 }}>
+                    Expert Advisor: <strong style={{ color: '#FFFFFF' }}>Trade2Options_BTC_Momentum.ex5</strong> | Magic Number: <strong style={{ color: '#AC58E9', fontFamily: 'var(--font-mono)' }}>{signal?.mt5_magic_number || 261016}</strong> | Stop Loss: Hard In-Chart
                   </div>
+
                   {simulateResult && (
-                    <div style={{ fontSize: 11, color: '#38BDF8', marginTop: 6, fontFamily: 'JetBrains Mono' }}>
+                    <div style={{
+                      fontSize: 11.5,
+                      color: '#AC58E9',
+                      marginTop: 10,
+                      fontFamily: 'var(--font-mono)',
+                      background: 'rgba(172, 88, 233, 0.08)',
+                      border: '1px solid rgba(172, 88, 233, 0.25)',
+                      padding: '8px 14px',
+                      borderRadius: 8
+                    }}>
                       {simulateResult}
                     </div>
                   )}
@@ -350,21 +658,9 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
                 <button
                   onClick={handleSimulate}
                   disabled={simulating}
-                  style={{
-                    padding: '10px 20px',
-                    borderRadius: 6,
-                    border: '1px solid #10B981',
-                    background: 'rgba(16, 185, 129, 0.15)',
-                    color: '#10B981',
-                    fontWeight: 700,
-                    fontSize: 12,
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8
-                  }}
+                  className="mt5-sim-btn shimmer-sweep"
                 >
-                  <span>{simulating ? 'Dispatching...' : '⚡ Simulate Live Signal Dispatch to MT5'}</span>
+                  <span>{simulating ? 'DISPATCHING IPC ORDER...' : '⚡ Simulate Live Signal Dispatch to MT5'}</span>
                 </button>
               </div>
             </>
@@ -374,3 +670,4 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
     </div>
   );
 };
+

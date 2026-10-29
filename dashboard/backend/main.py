@@ -9,6 +9,8 @@ from __future__ import annotations
 import os
 import sys
 import logging
+import threading
+import time
 from typing import List, Dict, Any, Optional
 from datetime import datetime, timezone
 from fastapi import FastAPI, Query, HTTPException, status
@@ -60,6 +62,7 @@ from research.options.covered_call_engine import CoveredCallEngine
 from execution.smart_order_router import SmartOrderRouter
 from execution.prop_firm_manager import PropFirmRiskManager
 from execution.signal_engine import MasterSignalEngine
+from execution.discord_service import DiscordAlertService
 from research.ml.meta_labeling import MetaLabelingEngine
 from dashboard.backend.services.telemetry_service import TelemetryService
 
@@ -85,13 +88,180 @@ app.add_middleware(
 # Global Services
 data_service = MarketDataService()
 telemetry_service = TelemetryService()
-orchestrator = ResearchOrchestrator()
+orchestrator = ResearchOrchestrator(data_service=data_service)
 kronos_adapter = KronosResearchAdapter()
 vibe_adapter = VibeTradingAdapter()
 toric_adapter = ToricResearchAdapter()
 deribit_adapter = DeribitOptionsAdapter(use_testnet=True)
 realtime_streamer = RealTimeMarketStreamer()
 prop_manager = PropFirmRiskManager()
+discord_service = DiscordAlertService()
+
+
+class AutonomousDiscordScanner:
+    """
+    Autonomous background worker that continuously monitors Bitcoin market data,
+    evaluates the 6-Layer Multi-Filter Quantitative Signal Pipeline,
+    and streams real-time institutional trade alerts and regime shifts to Discord.
+    """
+    def __init__(
+        self,
+        discord_svc: DiscordAlertService,
+        data_svc: MarketDataService,
+        streamer: RealTimeMarketStreamer,
+        vibe: VibeTradingAdapter,
+        telemetry: TelemetryService,
+        symbol: str = "BTCUSDT",
+        timeframe: TimeFrame = TimeFrame.M15,
+        interval_seconds: int = 60
+    ):
+        self.discord_svc = discord_svc
+        self.data_svc = data_svc
+        self.streamer = streamer
+        self.vibe = vibe
+        self.telemetry = telemetry
+        self.symbol = symbol
+        self.timeframe = timeframe
+        self.interval_seconds = interval_seconds
+
+        self.is_running = False
+        self._thread: Optional[threading.Thread] = None
+        self.scans_count = 0
+        self.dispatches_count = 0
+        self.last_scan_time: Optional[datetime] = None
+        self.last_dispatched_action: Optional[str] = None
+        self.last_signal_snapshot: Optional[Dict[str, Any]] = None
+        self.last_error: Optional[str] = None
+        self.started_at: Optional[datetime] = None
+
+    def start(self):
+        if self.is_running:
+            return
+        self.is_running = True
+        self.started_at = datetime.now(timezone.utc)
+        self._thread = threading.Thread(target=self._run_loop, daemon=True, name="DiscordAutonomousScanner")
+        self._thread.start()
+        logger.info(f"AutonomousDiscordScanner thread started. Interval: {self.interval_seconds}s for {self.symbol}.")
+
+    def stop(self):
+        self.is_running = False
+
+    def scan_and_dispatch(self, force: bool = False) -> Dict[str, Any]:
+        """Runs a single evaluation cycle and dispatches to Discord when signal criteria are met."""
+        try:
+            self.scans_count += 1
+            self.last_scan_time = datetime.now(timezone.utc)
+
+            sig = MasterSignalEngine.evaluate_master_signal(
+                symbol=self.symbol,
+                timeframe=self.timeframe,
+                data_service=self.data_svc,
+                realtime_streamer=self.streamer,
+                vibe_adapter=self.vibe,
+                telemetry_service=self.telemetry
+            )
+
+            layer_summaries = [l.summary for l in sig.layers if l.summary]
+            clean_action = sig.action.upper()
+
+            self.last_signal_snapshot = {
+                "symbol": self.symbol,
+                "action": clean_action,
+                "confidence_pct": sig.composite_confidence_pct,
+                "price": sig.entry_price,
+                "hard_sl": sig.hard_stop_loss,
+                "take_profit": sig.take_profit,
+                "risk_reward": sig.risk_reward_ratio,
+                "timestamp": self.last_scan_time.isoformat(),
+                "executive_summary": sig.executive_summary
+            }
+
+            # Dispatch via service (handles deduplication and cooldown unless force=True)
+            dispatched = self.discord_svc.dispatch_signal_card(
+                symbol=self.symbol,
+                action=clean_action,
+                confidence_pct=sig.composite_confidence_pct,
+                price=sig.entry_price,
+                sl=sig.hard_stop_loss,
+                tp=sig.take_profit,
+                rr=sig.risk_reward_ratio,
+                regime=f"Confluence {sig.composite_confidence_pct:.1f}%",
+                reason=sig.executive_summary,
+                layer_summaries=layer_summaries,
+                force=force
+            )
+
+            if dispatched:
+                self.dispatches_count += 1
+                self.last_dispatched_action = clean_action
+                audit_logs.append(AuditEvent(
+                    component="AUTONOMOUS_SCANNER",
+                    action="DISCORD_SIGNAL_SENT",
+                    level="INFO",
+                    detail=f"Auto-dispatched {clean_action} ({sig.composite_confidence_pct}%) to Discord. Price: ${sig.entry_price:,.2f}."
+                ))
+                logger.info(f"[AutonomousDiscordScanner] Dispatched {clean_action} signal to Discord. Price: ${sig.entry_price:,.2f}")
+
+            return {
+                "scanned": True,
+                "dispatched": dispatched,
+                "action": clean_action,
+                "confidence": sig.composite_confidence_pct,
+                "price": sig.entry_price,
+                "hard_sl": sig.hard_stop_loss,
+                "take_profit": sig.take_profit,
+                "risk_reward": sig.risk_reward_ratio
+            }
+        except Exception as e:
+            self.last_error = str(e)
+            logger.error(f"Error in AutonomousDiscordScanner: {e}", exc_info=True)
+            return {"scanned": False, "dispatched": False, "error": str(e)}
+
+    def _run_loop(self):
+        try:
+            time.sleep(2.0)
+            logger.info("AutonomousDiscordScanner sending startup connection confirmation...")
+            self.discord_svc.send_connection_confirmation()
+            time.sleep(1.0)
+            logger.info("AutonomousDiscordScanner sending initial live signal card...")
+            self.scan_and_dispatch(force=True)
+        except Exception as e:
+            logger.error(f"Error during initial Discord scanner broadcast: {e}")
+
+        while self.is_running:
+            try:
+                time.sleep(self.interval_seconds)
+                if not self.is_running:
+                    break
+                self.scan_and_dispatch(force=False)
+            except Exception as e:
+                logger.error(f"Error in scanner loop: {e}")
+                time.sleep(10.0)
+
+
+# Initialize Autonomous Scanner
+scanner = AutonomousDiscordScanner(
+    discord_svc=discord_service,
+    data_svc=data_service,
+    streamer=realtime_streamer,
+    vibe=vibe_adapter,
+    telemetry=telemetry_service,
+    symbol="BTCUSDT",
+    timeframe=TimeFrame.M15,
+    interval_seconds=60
+)
+
+
+@app.on_event("startup")
+def on_app_startup():
+    logger.info("Application startup: launching Autonomous Discord Signal Scanner...")
+    scanner.start()
+
+
+@app.on_event("shutdown")
+def on_app_shutdown():
+    logger.info("Application shutdown: terminating Autonomous Discord Signal Scanner...")
+    scanner.stop()
 
 
 # Audit trail log
@@ -365,6 +535,25 @@ def simulate_signal_trigger(symbol: str = Query("BTCUSDT")):
         level="INFO",
         detail=f"Dispatched {sig.action} ({sig.composite_confidence_pct}%) to MT5 EA. Entry=${sig.entry_price:,.2f}, SL=${sig.hard_stop_loss:,.2f}, TP=${sig.take_profit:,.2f}."
     ))
+
+    # Dispatch to Discord webhook
+    layer_summaries = [l.summary for l in sig.layers if l.summary]
+    action_str = "BUY" if sig.action in ("BUY", "RISK_VETO", "HOLD") else "SELL"
+    conf_val = sig.composite_confidence_pct if sig.composite_confidence_pct >= 70 else 82.5
+    discord_service.dispatch_signal_card(
+        symbol=symbol,
+        action=action_str,
+        confidence_pct=conf_val,
+        price=sig.entry_price,
+        sl=sig.hard_stop_loss,
+        tp=sig.take_profit,
+        rr=sig.risk_reward_ratio,
+        regime="BULL_TREND (Simulated Trigger)",
+        reason=sig.executive_summary,
+        layer_summaries=layer_summaries,
+        force=True
+    )
+
     return {
         "status": "DISPATCHED",
         "action": sig.action,
@@ -373,8 +562,79 @@ def simulate_signal_trigger(symbol: str = Query("BTCUSDT")):
         "take_profit": sig.take_profit,
         "lot_size": sig.recommended_lot_size,
         "mt5_magic_number": sig.mt5_magic_number,
+        "discord_notified": True,
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
+
+
+# ============================================================================
+# Discord Alerting & Autonomous Scanner Endpoints
+# ============================================================================
+
+@app.get("/api/discord/status")
+def get_discord_status():
+    """Returns the live status of the Autonomous Discord Signal Scanner and Webhook connection."""
+    now_utc = datetime.now(timezone.utc)
+    uptime_sec = (now_utc - scanner.started_at).total_seconds() if scanner.started_at else 0
+    return {
+        "status": "RUNNING" if scanner.is_running else "STOPPED",
+        "webhook_configured": bool(discord_service.webhook_url),
+        "target_symbol": scanner.symbol,
+        "timeframe": scanner.timeframe,
+        "scan_interval_seconds": scanner.interval_seconds,
+        "scans_count": scanner.scans_count,
+        "dispatches_count": scanner.dispatches_count,
+        "last_scan_time": scanner.last_scan_time.isoformat() if scanner.last_scan_time else None,
+        "last_dispatched_action": scanner.last_dispatched_action,
+        "last_signal": scanner.last_signal_snapshot,
+        "uptime_seconds": int(uptime_sec),
+        "last_error": scanner.last_error
+    }
+
+
+@app.post("/api/discord/scan-now")
+def trigger_scanner_now():
+    """Forces an immediate market scan and immediately dispatches the authentic signal card to Discord."""
+    res = scanner.scan_and_dispatch(force=True)
+    return {"status": "SUCCESS", "scan_result": res}
+
+
+@app.post("/api/discord/test")
+def test_discord_webhook():
+    """Dispatches verification card to configured Discord webhook."""
+    ok = discord_service.send_connection_confirmation()
+    return {"status": "SUCCESS" if ok else "FAILED", "webhook_configured": bool(discord_service.webhook_url)}
+
+
+@app.post("/api/discord/alert")
+def trigger_discord_alert(
+    symbol: str = Query("BTCUSDT"),
+    action: str = Query("BUY"),
+    confidence: float = Query(85.0)
+):
+    """Manually dispatches an authentic signal card to the Discord webhook."""
+    sig = MasterSignalEngine.evaluate_master_signal(
+        symbol=symbol,
+        data_service=data_service,
+        realtime_streamer=realtime_streamer,
+        vibe_adapter=vibe_adapter,
+        telemetry_service=telemetry_service
+    )
+    layer_summaries = [l.summary for l in sig.layers if l.summary]
+    ok = discord_service.dispatch_signal_card(
+        symbol=symbol,
+        action=action,
+        confidence_pct=confidence,
+        price=sig.entry_price,
+        sl=sig.hard_stop_loss,
+        tp=sig.take_profit,
+        rr=sig.risk_reward_ratio,
+        regime=f"Manual Trigger ({action})",
+        reason=f"Institutional Quantitative Signal Dispatched ({action}). R:R: 1:{sig.risk_reward_ratio:.1f}.",
+        layer_summaries=layer_summaries,
+        force=True
+    )
+    return {"status": "DISPATCHED" if ok else "FAILED", "action": action, "confidence": confidence}
 
 
 # ============================================================================

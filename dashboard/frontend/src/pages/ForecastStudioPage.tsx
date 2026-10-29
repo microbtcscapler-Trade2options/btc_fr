@@ -46,11 +46,16 @@ export const ForecastStudioPage: React.FC = () => {
 
   if (loading && !timeline) {
     return (
-      <div className="t2o-card" style={{ padding: 48, textAlign: 'center', color: '#64748B' }}>
-        <div style={{ fontSize: 16, fontWeight: 600, color: '#38BDF8', marginBottom: 8 }}>
-          Initializing AI Forecasting Studio & Multi-Agent Conclave...
+      <div className="t2o-card stagger-card" style={{ padding: 48, textAlign: 'center', color: 'var(--text-dim)' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+          <span className="price-beacon-dot" />
+          <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--accent-cyan-bright)' }}>
+            INITIALIZING AI FORECASTING CONCLAVE
+          </span>
         </div>
-        <div style={{ fontSize: 13 }}>Computing continuous RevIN probabilistic cone & Vibe-Trading consensus...</div>
+        <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+          Computing continuous RevIN probabilistic cone & Vibe-Trading consensus...
+        </div>
       </div>
     );
   }
@@ -113,42 +118,40 @@ export const ForecastStudioPage: React.FC = () => {
   const nowPoint = nowPointIndex >= 0 ? points[nowPointIndex] : null;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
       {/* Studio Header & Model Status */}
-      <div className="t2o-card" style={{ padding: '20px 24px', background: 'linear-gradient(180deg, #0B1120 0%, #07090E 100%)' }}>
+      <div className="t2o-card stagger-card stagger-1" style={{ padding: '22px 26px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1, color: '#38BDF8', textTransform: 'uppercase' }}>
+              <span className="price-beacon-dot" />
+              <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: 1, color: 'var(--accent-cyan-bright)', textTransform: 'uppercase' }}>
                 AI Forecasting Studio
               </span>
               <span className="t2o-badge badge-purple" style={{ fontSize: 10 }}>Continuous Horizon Engine</span>
               <span className="t2o-badge badge-bullish" style={{ fontSize: 10 }}>24/7 Live Active</span>
+              <div className="live-equalizer">
+                <span className="live-equalizer-bar" />
+                <span className="live-equalizer-bar" />
+                <span className="live-equalizer-bar" />
+                <span className="live-equalizer-bar" />
+              </div>
             </div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: '#F8FAFC', marginTop: 4, letterSpacing: 0.2 }}>
+            <div style={{ fontSize: 24, fontWeight: 900, color: 'var(--text-main)', marginTop: 6, letterSpacing: 0.2 }}>
               Multi-Horizon Price Trajectory & Confidence Cone
             </div>
-            <div style={{ fontSize: 12, color: '#94A3B8', marginTop: 4 }}>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
               Probabilistic deep-learning forecasting with 90% volatility cones evaluated throughout time against real-time Bitcoin spot.
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ display: 'flex', background: '#090D17', borderRadius: 6, border: '1px solid #1E293B', padding: 2 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <div className="segmented-pill-container">
               {(['15m', '1h', '4h'] as TimeFrame[]).map(tf => (
                 <button
                   key={tf}
                   onClick={() => setTimeframe(tf)}
-                  style={{
-                    padding: '6px 12px',
-                    border: 'none',
-                    background: timeframe === tf ? '#38BDF8' : 'transparent',
-                    color: timeframe === tf ? '#07090E' : '#94A3B8',
-                    fontWeight: timeframe === tf ? 700 : 500,
-                    borderRadius: 4,
-                    fontSize: 11,
-                    cursor: 'pointer'
-                  }}
+                  className={`segmented-pill-btn ${timeframe === tf ? 'segmented-pill-btn-active' : ''}`}
                 >
                   {tf.toUpperCase()}
                 </button>
@@ -158,15 +161,13 @@ export const ForecastStudioPage: React.FC = () => {
             <button
               onClick={loadAll}
               disabled={refreshing}
+              className="control-pill-btn shimmer-sweep"
               style={{
-                padding: '7px 16px',
-                borderRadius: 6,
-                border: '1px solid #38BDF8',
-                background: 'rgba(56, 189, 248, 0.1)',
-                color: '#38BDF8',
-                fontWeight: 600,
-                fontSize: 12,
-                cursor: 'pointer'
+                padding: '6px 16px',
+                fontWeight: 700,
+                background: 'linear-gradient(135deg, rgba(172, 88, 233,  0.15) 0%, rgba(9, 19, 25, 0.8) 100%)',
+                borderColor: 'rgba(172, 88, 233,  0.4)',
+                color: 'var(--text-main)'
               }}
             >
               {refreshing ? 'Updating...' : 'Sync Live'}
@@ -175,75 +176,75 @@ export const ForecastStudioPage: React.FC = () => {
         </div>
 
         {/* Top Metric Strip */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, marginTop: 18, paddingTop: 16, borderTop: '1px solid #1E293B' }}>
-          <div style={{ background: '#090D17', padding: '12px 16px', borderRadius: 6, border: '1px solid #1E293B' }}>
-            <div style={{ fontSize: 10, color: '#64748B', fontWeight: 600 }}>CURRENT SPOT CLOSE</div>
-            <div style={{ fontSize: 18, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#F8FAFC', marginTop: 4 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, marginTop: 18, paddingTop: 16, borderTop: '1px solid var(--border-subtle)' }}>
+          <div className="exec-level-box" style={{ padding: '12px 16px' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>CURRENT SPOT CLOSE</div>
+            <div style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: 4 }}>
               ${timeline?.current_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }) || '82,000.00'}
             </div>
-            <div style={{ fontSize: 10, color: '#10B981', marginTop: 2 }}>Zero Lookahead Validated</div>
+            <div style={{ fontSize: 10, color: 'var(--bullish-green)', marginTop: 2, fontWeight: 600 }}>Zero Lookahead Validated</div>
           </div>
 
-          <div style={{ background: '#090D17', padding: '12px 16px', borderRadius: 6, border: '1px solid #1E293B' }}>
-            <div style={{ fontSize: 10, color: '#64748B', fontWeight: 600 }}>ANTICIPATED TRAJECTORY</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: timeline?.expected_direction.includes('BULLISH') ? '#10B981' : '#EF4444', marginTop: 4 }}>
+          <div className="exec-level-box" style={{ padding: '12px 16px' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>ANTICIPATED TRAJECTORY</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: timeline?.expected_direction.includes('BULLISH') ? 'var(--bullish-green)' : 'var(--bearish-red)', marginTop: 4 }}>
               {timeline?.expected_direction.replace(/_/g, ' ') || 'CALCULATING'}
             </div>
-            <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Model: {timeline?.model_name}</div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Model: {timeline?.model_name}</div>
           </div>
 
-          <div style={{ background: '#090D17', padding: '12px 16px', borderRadius: 6, border: '1px solid #1E293B' }}>
-            <div style={{ fontSize: 10, color: '#64748B', fontWeight: 600 }}>CONVERGENCE CONFIDENCE</div>
-            <div style={{ fontSize: 18, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#38BDF8', marginTop: 4 }}>
+          <div className="exec-level-box" style={{ padding: '12px 16px' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>CONVERGENCE CONFIDENCE</div>
+            <div style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan-bright)', marginTop: 4 }}>
               {timeline?.confidence_pct}%
             </div>
-            <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>90% Probabilistic Bound</div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>90% Probabilistic Bound</div>
           </div>
 
-          <div style={{ background: '#090D17', padding: '12px 16px', borderRadius: 6, border: '1px solid #1E293B' }}>
-            <div style={{ fontSize: 10, color: '#64748B', fontWeight: 600 }}>VIBE COUNCIL VERDICT</div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: vibe?.consensus_verdict.includes('BUY') ? '#10B981' : vibe?.consensus_verdict.includes('VETO') ? '#EF4444' : '#F59E0B', marginTop: 4 }}>
+          <div className="exec-level-box" style={{ padding: '12px 16px' }}>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>VIBE COUNCIL VERDICT</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: vibe?.consensus_verdict.includes('BUY') ? 'var(--bullish-green)' : vibe?.consensus_verdict.includes('VETO') ? 'var(--bearish-red)' : 'var(--warning-amber)', marginTop: 4 }}>
               {vibe?.consensus_verdict.replace(/_/g, ' ') || 'VOTING'}
             </div>
-            <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Conviction: {vibe?.composite_conviction_pct}%</div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Conviction: {vibe?.composite_conviction_pct}%</div>
           </div>
         </div>
       </div>
 
       {/* Main Continuous Timeline Chart */}
-      <div className="t2o-card" style={{ padding: 20 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+      <div className="t2o-card stagger-card stagger-2" style={{ padding: 22 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 10 }}>
           <div>
-            <span style={{ fontSize: 13, fontWeight: 700, color: '#F8FAFC' }}>
+            <span style={{ fontSize: 13, fontWeight: 800, color: 'var(--text-main)' }}>
               Continuous Price Timeline: Historical Track Record vs Forward Projections
             </span>
-            <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 2 }}>
-              Solid Green = Realized Spot | Dashed Cyan = Projected Drift | Blue Shaded Cone = 90% Confidence Interval
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
+              Solid Cyan = Realized Spot | Dashed Cyan-Bright = Projected Drift | Cyan Shaded Cone = 90% Confidence Interval
             </div>
           </div>
           <div style={{ display: 'flex', gap: 14, fontSize: 11 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 12, height: 3, background: '#10B981' }} />
-              <span style={{ color: '#94A3B8' }}>Actual Spot</span>
+              <div style={{ width: 12, height: 3, background: 'var(--accent-cyan)' }} />
+              <span style={{ color: 'var(--text-muted)' }}>Actual Spot</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 12, height: 3, background: '#38BDF8', borderTop: '1px dashed #38BDF8' }} />
-              <span style={{ color: '#94A3B8' }}>Kronos Projection</span>
+              <div style={{ width: 12, height: 3, background: 'var(--accent-cyan-bright)', borderTop: '1px dashed var(--accent-cyan-bright)' }} />
+              <span style={{ color: 'var(--text-muted)' }}>Kronos Projection</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 12, height: 10, background: 'rgba(56, 189, 248, 0.2)', border: '1px solid rgba(56, 189, 248, 0.4)' }} />
-              <span style={{ color: '#94A3B8' }}>90% Cone</span>
+              <div style={{ width: 12, height: 10, background: 'rgba(172, 88, 233,  0.2)', border: '1px solid rgba(172, 88, 233,  0.4)' }} />
+              <span style={{ color: 'var(--text-muted)' }}>90% Cone</span>
             </div>
           </div>
         </div>
 
         {/* SVG Chart */}
-        <div style={{ width: '100%', overflowX: 'auto', background: '#05070B', borderRadius: 8, padding: '10px 0', border: '1px solid #1E293B' }}>
+        <div style={{ width: '100%', overflowX: 'auto', background: 'rgba(6, 11, 14, 0.95)', borderRadius: 14, padding: '12px 0', border: '1px solid var(--border-subtle)' }}>
           <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} style={{ width: '100%', height: 'auto', minWidth: 650, display: 'block' }}>
             <defs>
               <linearGradient id="coneGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.25" />
-                <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.05" />
+                <stop offset="0%" stopColor="#AC58E9" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#AC58E9" stopOpacity="0.04" />
               </linearGradient>
             </defs>
 
@@ -253,8 +254,8 @@ export const ForecastStudioPage: React.FC = () => {
               const priceTick = maxPrice - pct * priceRange;
               return (
                 <g key={idx}>
-                  <line x1={paddingX} y1={yVal} x2={svgWidth - paddingX} y2={yVal} stroke="#1E293B" strokeDasharray="3 3" />
-                  <text x={paddingX - 10} y={yVal + 4} fill="#64748B" fontSize="9" textAnchor="end" fontFamily="JetBrains Mono">
+                  <line x1={paddingX} y1={yVal} x2={svgWidth - paddingX} y2={yVal} stroke="rgba(172, 88, 233,  0.08)" strokeDasharray="3 3" />
+                  <text x={paddingX - 10} y={yVal + 4} fill="var(--text-dim)" fontSize="9" textAnchor="end" fontFamily="var(--font-mono)">
                     ${Math.round(priceTick).toLocaleString()}
                   </text>
                 </g>
@@ -263,17 +264,17 @@ export const ForecastStudioPage: React.FC = () => {
 
             {/* Confidence Polygon */}
             {confidencePolygon && (
-              <path d={confidencePolygon} fill="url(#coneGradient)" stroke="rgba(56, 189, 248, 0.3)" strokeWidth="1" strokeDasharray="2 2" />
+              <path d={confidencePolygon} fill="url(#coneGradient)" stroke="rgba(172, 88, 233,  0.35)" strokeWidth="1" strokeDasharray="2 2" />
             )}
 
             {/* Projected Trajectory Line */}
             {predPath && (
-              <path d={predPath} fill="none" stroke="#38BDF8" strokeWidth="2.5" strokeDasharray="4 4" />
+              <path d={predPath} fill="none" stroke="var(--accent-cyan-bright)" strokeWidth="2.5" strokeDasharray="4 4" />
             )}
 
             {/* Actual Price Line */}
             {actualPath && (
-              <path d={actualPath} fill="none" stroke="#10B981" strokeWidth="2.5" />
+              <path d={actualPath} fill="none" stroke="var(--accent-cyan)" strokeWidth="2.5" />
             )}
 
             {/* NOW Vertical Divider */}
@@ -284,11 +285,11 @@ export const ForecastStudioPage: React.FC = () => {
                   y1={paddingY}
                   x2={getX(nowPointIndex)}
                   y2={svgHeight - paddingY}
-                  stroke="#F59E0B"
+                  stroke="var(--warning-amber)"
                   strokeWidth="1.5"
                   strokeDasharray="2 2"
                 />
-                <text x={getX(nowPointIndex)} y={paddingY - 8} fill="#F59E0B" fontSize="10" fontWeight="700" textAnchor="middle">
+                <text x={getX(nowPointIndex)} y={paddingY - 8} fill="var(--warning-amber)" fontSize="10" fontWeight="700" textAnchor="middle">
                   NOW (LIVE)
                 </text>
               </g>
@@ -308,15 +309,15 @@ export const ForecastStudioPage: React.FC = () => {
                     cx={x}
                     cy={yPred}
                     r={isNow ? 6 : isFuture ? 4 : 3}
-                    fill={isNow ? '#F59E0B' : isFuture ? '#38BDF8' : '#10B981'}
-                    stroke="#07090E"
+                    fill={isNow ? 'var(--warning-amber)' : isFuture ? 'var(--accent-cyan-bright)' : 'var(--accent-cyan)'}
+                    stroke="var(--bg-primary)"
                     strokeWidth="2"
                   />
                   {/* Label */}
-                  <text x={x} y={svgHeight - 10} fill="#94A3B8" fontSize="9" textAnchor="middle" fontFamily="JetBrains Mono">
+                  <text x={x} y={svgHeight - 10} fill="var(--text-muted)" fontSize="9" textAnchor="middle" fontFamily="var(--font-mono)">
                     {pt.horizon_label}
                   </text>
-                  <text x={x} y={svgHeight - 20} fill="#64748B" fontSize="8" textAnchor="middle">
+                  <text x={x} y={svgHeight - 20} fill="var(--text-dim)" fontSize="8" textAnchor="middle">
                     {pt.timestamp.split(' ')[0]}
                   </text>
                 </g>
@@ -333,18 +334,18 @@ export const ForecastStudioPage: React.FC = () => {
             const isBull = delta >= 0;
 
             return (
-              <div key={proj.horizon_label} style={{ background: '#090D17', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
+              <div key={proj.horizon_label} className="exec-level-box" style={{ padding: 14 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: '#38BDF8' }}>Horizon {proj.horizon_label}</span>
+                  <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--accent-cyan-bright)' }}>Horizon {proj.horizon_label}</span>
                   <span className={`t2o-badge ${isBull ? 'badge-bullish' : 'badge-bearish'}`} style={{ fontSize: 9 }}>
                     {isBull ? '+' : ''}{deltaPct.toFixed(2)}%
                   </span>
                 </div>
-                <div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#F8FAFC', marginTop: 6 }}>
+                <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: 6 }}>
                   ${proj.predicted_price.toLocaleString()}
                 </div>
-                <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 4 }}>
-                  90% Range: <span style={{ color: '#E2E8F0', fontFamily: 'JetBrains Mono' }}>${proj.lower_bound_90.toLocaleString()} - ${proj.upper_bound_90.toLocaleString()}</span>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>
+                  90% Range: <span style={{ color: 'var(--text-main)', fontFamily: 'var(--font-mono)' }}>${proj.lower_bound_90.toLocaleString()} - ${proj.upper_bound_90.toLocaleString()}</span>
                 </div>
               </div>
             );
@@ -355,26 +356,26 @@ export const ForecastStudioPage: React.FC = () => {
       {/* Two Column Layout: Vibe-Trading Council & TORIC Whale Intelligence */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))', gap: 18 }}>
         {/* Vibe-Trading Multi-Agent Council */}
-        <div className="t2o-card" style={{ padding: 20 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1E293B', paddingBottom: 10, marginBottom: 14 }}>
+        <div className="t2o-card stagger-card stagger-3" style={{ padding: 22 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)', paddingBottom: 10, marginBottom: 16 }}>
             <div>
-              <div style={{ fontSize: 11, color: '#64748B', fontWeight: 600 }}>RESEARCH ENGINE 1</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#38BDF8' }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.8 }}>RESEARCH ENGINE 1</div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--accent-cyan-bright)' }}>
                 Vibe-Trading Autonomous Research Council
               </div>
             </div>
             <span className="t2o-badge badge-bullish">CONNECTED (NATIVE)</span>
           </div>
 
-          <div style={{ background: '#090D17', padding: 14, borderRadius: 6, border: '1px solid #1E293B', marginBottom: 14 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: 12, color: '#94A3B8' }}>Council Verdict:</span>
+          <div className="layer-row-interactive" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: 14, marginBottom: 14 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Council Verdict:</span>
               <span className={`t2o-badge ${vibe?.consensus_verdict.includes('BUY') ? 'badge-bullish' : vibe?.consensus_verdict.includes('VETO') ? 'badge-bearish' : 'badge-warning'}`}>
                 {vibe?.consensus_verdict}
               </span>
             </div>
-            <div style={{ fontSize: 11, color: '#CBD5E1', marginTop: 8, lineHeight: 1.5 }}>
-              <b>Executive Rationale:</b> {vibe?.executive_rationale}
+            <div style={{ fontSize: 11, color: 'var(--text-main)', marginTop: 8, lineHeight: 1.6 }}>
+              <strong>Executive Rationale:</strong> {vibe?.executive_rationale}
             </div>
           </div>
 
@@ -386,16 +387,16 @@ export const ForecastStudioPage: React.FC = () => {
               const isBear = ag.stance === 'BEARISH';
 
               return (
-                <div key={ag.agent_name} style={{ background: '#05070B', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#F8FAFC' }}>
+                <div key={ag.agent_name} className="layer-row-interactive" style={{ flexDirection: 'column', alignItems: 'flex-start', padding: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--text-main)' }}>
                       {ag.agent_name.replace(/_/g, ' ')}
                     </span>
                     <span className={`t2o-badge ${isBull ? 'badge-bullish' : isVeto ? 'badge-bearish' : isBear ? 'badge-bearish' : 'badge-warning'}`} style={{ fontSize: 9 }}>
                       {ag.stance} ({ag.conviction_pct}%)
                     </span>
                   </div>
-                  <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4, lineHeight: 1.4 }}>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4, lineHeight: 1.5 }}>
                     {ag.key_observation}
                   </div>
                 </div>
@@ -405,11 +406,11 @@ export const ForecastStudioPage: React.FC = () => {
         </div>
 
         {/* TORIC Whale & Macro On-Chain Intelligence */}
-        <div className="t2o-card" style={{ padding: 20 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1E293B', paddingBottom: 10, marginBottom: 14 }}>
+        <div className="t2o-card stagger-card stagger-4" style={{ padding: 22 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)', paddingBottom: 10, marginBottom: 16 }}>
             <div>
-              <div style={{ fontSize: 11, color: '#64748B', fontWeight: 600 }}>RESEARCH ENGINE 2</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#38BDF8' }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.8 }}>RESEARCH ENGINE 2</div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--accent-cyan-bright)' }}>
                 TORIC On-Chain & Macro Liquidity Engine
               </div>
             </div>
@@ -417,51 +418,58 @@ export const ForecastStudioPage: React.FC = () => {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12, marginBottom: 14 }}>
-            <div style={{ background: '#090D17', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
-              <div style={{ fontSize: 10, color: '#64748B' }}>24H WHALE NET ACCUMULATION</div>
-              <div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#10B981', marginTop: 4 }}>
+            <div className="exec-level-box" style={{ padding: 12 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700 }}>24H WHALE NET ACCUMULATION</div>
+              <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--bullish-green)', marginTop: 4 }}>
                 +{toric?.whale_net_flow_btc_24h?.toLocaleString()} BTC
               </div>
-              <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Institutional Tier Wallets (&gt;1k BTC)</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Institutional Tier Wallets (&gt;1k BTC)</div>
             </div>
 
-            <div style={{ background: '#090D17', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
-              <div style={{ fontSize: 10, color: '#64748B' }}>EXCHANGE RESERVE TREND</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: '#38BDF8', marginTop: 6 }}>
+            <div className="exec-level-box" style={{ padding: 12 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700 }}>EXCHANGE RESERVE TREND</div>
+              <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--accent-cyan-bright)', marginTop: 6 }}>
                 {toric?.exchange_reserve_trend.replace(/_/g, ' ')}
               </div>
-              <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Depletion & Outflow Regime</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Depletion & Outflow Regime</div>
             </div>
 
-            <div style={{ background: '#090D17', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
-              <div style={{ fontSize: 10, color: '#64748B' }}>MVRV Z-SCORE VALUATION</div>
-              <div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#F8FAFC', marginTop: 4 }}>
+            <div className="exec-level-box" style={{ padding: 12 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700 }}>MVRV Z-SCORE VALUATION</div>
+              <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: 4 }}>
                 {toric?.mvrv_z_score?.toFixed(2)}
               </div>
-              <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Below Euphoric Extreme (&lt; 3.5)</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Below Euphoric Extreme (&lt; 3.5)</div>
             </div>
 
-            <div style={{ background: '#090D17', padding: 12, borderRadius: 6, border: '1px solid #1E293B' }}>
-              <div style={{ fontSize: 10, color: '#64748B' }}>ANNUALIZED FUNDING RATE</div>
-              <div style={{ fontSize: 17, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#F59E0B', marginTop: 4 }}>
+            <div className="exec-level-box" style={{ padding: 12 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700 }}>ANNUALIZED FUNDING RATE</div>
+              <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--warning-amber)', marginTop: 4 }}>
                 {toric?.funding_rate_annualized_pct}%
               </div>
-              <div style={{ fontSize: 10, color: '#94A3B8', marginTop: 2 }}>Balanced Derivatives Sentiment</div>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Balanced Derivatives Sentiment</div>
             </div>
           </div>
 
-          <div style={{ background: '#05070B', padding: 14, borderRadius: 6, border: '1px solid #1E293B' }}>
+          <div className="layer-row-interactive" style={{ flexDirection: 'column', alignItems: 'stretch', padding: 14 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: 12, color: '#94A3B8' }}>Macro Liquidity Index:</span>
-              <span style={{ fontSize: 14, fontWeight: 700, fontFamily: 'JetBrains Mono', color: '#38BDF8' }}>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>Macro Liquidity Index:</span>
+              <span style={{ fontSize: 15, fontWeight: 800, fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan-bright)' }}>
                 {toric?.macro_liquidity_index}/100
               </span>
             </div>
-            <div style={{ width: '100%', height: 6, background: '#1E293B', borderRadius: 3, marginTop: 8, overflow: 'hidden' }}>
-              <div style={{ width: `${toric?.macro_liquidity_index || 70}%`, height: '100%', background: 'linear-gradient(90deg, #38BDF8, #10B981)', borderRadius: 3 }} />
+            <div className="indicator-metric-bar" style={{ marginTop: 8, height: 6 }}>
+              <div
+                className="indicator-metric-fill"
+                style={{
+                  width: `${toric?.macro_liquidity_index || 70}%`,
+                  background: 'var(--accent-cyan-gradient)',
+                  boxShadow: '0 0 12px var(--accent-cyan)'
+                }}
+              />
             </div>
-            <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 10 }}>
-              On-Chain Sentiment: <b style={{ color: '#10B981' }}>{toric?.on_chain_sentiment.replace(/_/g, ' ')}</b>. Confirms spot accumulation without leverage froth.
+            <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 10 }}>
+              On-Chain Sentiment: <b style={{ color: 'var(--bullish-green)' }}>{toric?.on_chain_sentiment.replace(/_/g, ' ')}</b>. Confirms spot accumulation without leverage froth.
             </div>
           </div>
         </div>

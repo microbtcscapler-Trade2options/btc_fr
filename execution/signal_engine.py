@@ -253,10 +253,38 @@ class MasterSignalEngine:
         composite_confidence = sum((l.score * (l.weight_pct / 100.0)) for l in layers)
         composite_confidence = round(composite_confidence, 1)
 
+        # Determine candidate directional bias for the trade attempt
+        if pt_bull:
+            candidate_side = "BUY"
+            candidate_label = "LONG / BUY"
+        elif pt_bear:
+            candidate_side = "SELL"
+            candidate_label = "SHORT / SELL"
+        elif ind and ind.entry_timing.ema9_above_ema21:
+            candidate_side = "BUY"
+            candidate_label = "LONG / BUY (Fast EMA 9/21)"
+        elif ind and not ind.entry_timing.ema9_above_ema21:
+            candidate_side = "SELL"
+            candidate_label = "SHORT / SELL (Fast EMA 9/21)"
+        else:
+            candidate_side = "BOTH"
+            candidate_label = "BOTH SIDES (Consolidation Range)"
+
         # Determine Master Action
         if is_veto or meta_pred.veto_trade or daily_loss_pct >= 4.0:
-            master_action = "RISK_VETO"
-            exec_summary = "Signal Engine Halted: Active Risk Veto / Volatility Shock prevents execution."
+            veto_triggers = []
+            if is_veto:
+                veto_triggers.append(f"Autonomous Council Veto ({vibe_verdict.consensus_verdict})")
+            if meta_pred.veto_trade:
+                veto_triggers.append(f"ML Meta-Labeling Veto (Win Prob {meta_pred.win_probability_pct:.1f}% < 50%)")
+            if daily_loss_pct >= 4.0:
+                veto_triggers.append(f"Prop Firm Drawdown Guard ({daily_loss_pct:.1f}% used)")
+            if not veto_triggers:
+                veto_triggers.append("Volatility Shock / Regime Filter")
+
+            triggers_str = "; ".join(veto_triggers)
+            master_action = f"RISK_VETO_{candidate_side}"
+            exec_summary = f"Risk Veto on {candidate_label}: {triggers_str}. Entry blocked to preserve capital."
         elif pt_bull and mom_passed and vibe_passed and composite_confidence >= 70.0:
             master_action = "STRONG_BUY"
             exec_summary = f"Strong Long Momentum confirmed across 6 layers with {composite_confidence}% confidence."
@@ -271,7 +299,7 @@ class MasterSignalEngine:
             exec_summary = f"Market in consolidation ({regime_snap.regime}). Waiting for directional confluence."
 
         # Target Trade Parameters for MT5
-        is_buy = "BUY" in master_action
+        is_buy = ("BUY" in master_action) and ("SELL" not in master_action)
         sl_distance = round(atr * 1.5, 2)
         tp_distance = round(atr * 2.4, 2)
         entry_p = round(current_price, 2)
@@ -305,7 +333,7 @@ class MasterSignalEngine:
             SignalExecutionStage(
                 stage_id="stage_2_filter",
                 name="2. 6-Layer Multi-Filter Validation",
-                status="COMPLETED" if (master_action not in ["STANDBY_NEUTRAL", "RISK_VETO"]) else "BLOCKED",
+                status="COMPLETED" if (master_action not in ["STANDBY_NEUTRAL"] and not master_action.startswith("RISK_VETO")) else "BLOCKED",
                 detail="Evaluated EMA 20/50/200, EMA 9/21, ADX, CVD, and Meta-Labeling.",
                 latency_ms=4.8
             ),

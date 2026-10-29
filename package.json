@@ -1,0 +1,11 @@
+{
+  "name": "trade2options",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trade2Options - Institutional Quantitative Trading & Options Terminal",
+  "scripts": {
+    "build": "cd dashboard/frontend && npm install && npm run build",
+    "dev": "cd dashboard/frontend && npm run dev",
+    "preview": "cd dashboard/frontend && npm run preview"
+  }
+}
