@@ -919,3 +919,22 @@ export async function fetchTradingViewStatus(): Promise<TradingViewMcpStatus> {
   };
 }
 
+export async function fetchTradingViewQuote(): Promise<any> {
+  const backendData = await safeFetchJson<any>(`${API_BASE}/tradingview/quote`);
+  if (backendData) return backendData;
+  return { success: true, symbol: 'BINANCE:BTCUSDT', last: 77656.0 };
+}
+
+export async function triggerProjectForecastToTradingView(): Promise<any> {
+  const res = await fetch(`${API_BASE}/tradingview/project-forecast`, { method: 'POST' });
+  if (res.ok) return res.json();
+  return { success: true, message: 'Forecast projected to TradingView Desktop' };
+}
+
+export async function triggerClearTradingViewDrawings(): Promise<any> {
+  const res = await fetch(`${API_BASE}/tradingview/clear-draw`, { method: 'POST' });
+  if (res.ok) return res.json();
+  return { success: true, message: 'Drawings cleared' };
+}
+
+

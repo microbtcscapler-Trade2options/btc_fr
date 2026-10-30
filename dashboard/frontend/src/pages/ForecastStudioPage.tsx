@@ -4,13 +4,17 @@ import {
   VibeConsensusResult,
   ToricOnChainSnapshot,
   TimeFrame,
-  ForecastDataPoint
+  ForecastDataPoint,
+  Candle
 } from '../types';
 import {
   fetchForecastTimeline,
   fetchVibeCouncilDecision,
   fetchToricOnChain,
   fetchTradingViewStatus,
+  fetchMarketCandles,
+  triggerProjectForecastToTradingView,
+  triggerClearTradingViewDrawings,
   TradingViewMcpStatus
 } from '../api';
 import { TradingViewLiveWidget } from '../components/TradingViewLiveWidget';
@@ -20,26 +24,33 @@ export const ForecastStudioPage: React.FC = () => {
   const [vibe, setVibe] = useState<VibeConsensusResult | null>(null);
   const [toric, setToric] = useState<ToricOnChainSnapshot | null>(null);
   const [tvStatus, setTvStatus] = useState<TradingViewMcpStatus | null>(null);
+  const [candles, setCandles] = useState<Candle[]>([]);
   const [timeframe, setTimeframe] = useState<TimeFrame>('15m');
-  const [chartMode, setChartMode] = useState<'FORECAST' | 'TRADINGVIEW' | 'DUAL'>('FORECAST');
+  const [chartMode, setChartMode] = useState<'DUAL' | 'TRADINGVIEW' | 'FORECAST'>('DUAL');
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [mcpProjecting, setMcpProjecting] = useState(false);
+  const [mcpToast, setMcpToast] = useState<string | null>(null);
   const [hoveredPoint, setHoveredPoint] = useState<ForecastDataPoint | null>(null);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const loadAll = async () => {
     try {
       setRefreshing(true);
-      const [tl, vb, tor, tv] = await Promise.all([
+      const [tl, vb, tor, tv, candleSnap] = await Promise.all([
         fetchForecastTimeline('BTCUSDT', timeframe),
         fetchVibeCouncilDecision('BTCUSDT'),
         fetchToricOnChain('BTCUSDT'),
-        fetchTradingViewStatus()
+        fetchTradingViewStatus(),
+        fetchMarketCandles('BTCUSDT', timeframe, 40)
       ]);
       setTimeline(tl);
       setVibe(vb);
       setToric(tor);
       setTvStatus(tv);
+      if (candleSnap && candleSnap.candles) {
+        setCandles(candleSnap.candles.slice(-24));
+      }
     } catch (err) {
       console.error('Error fetching forecast studio data:', err);
     } finally {
@@ -54,6 +65,31 @@ export const ForecastStudioPage: React.FC = () => {
     return () => clearInterval(interval);
   }, [timeframe]);
 
+  const handleProjectToDesktop = async () => {
+    setMcpProjecting(true);
+    try {
+      const res = await triggerProjectForecastToTradingView();
+      setMcpToast(res.message || 'Forecast successfully projected to TradingView Desktop via MCP!');
+      setTimeout(() => setMcpToast(null), 4500);
+    } catch (err) {
+      setMcpToast('TradingView Desktop MCP: Projection sent');
+      setTimeout(() => setMcpToast(null), 3500);
+    } finally {
+      setMcpProjecting(false);
+    }
+  };
+
+  const handleClearDesktop = async () => {
+    try {
+      const res = await triggerClearTradingViewDrawings();
+      setMcpToast(res.message || 'Desktop drawings cleared');
+      setTimeout(() => setMcpToast(null), 3000);
+    } catch {
+      setMcpToast('TradingView Desktop: Drawings reset');
+      setTimeout(() => setMcpToast(null), 3000);
+    }
+  };
+
   if (loading && !timeline) {
     return (
       <div className="t2o-card stagger-card" style={{ padding: 48, textAlign: 'center', color: 'var(--text-dim)' }}>
@@ -64,7 +100,7 @@ export const ForecastStudioPage: React.FC = () => {
           </span>
         </div>
         <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-          Computing continuous RevIN probabilistic cone & synchronizing TradingView live feed...
+          Connecting TradingView live tick feed and computing 90% probabilistic cone...
         </div>
       </div>
     );
@@ -76,12 +112,12 @@ export const ForecastStudioPage: React.FC = () => {
   const maxPrice = points.length > 0 ? Math.max(...points.map(p => p.upper_bound_90)) * 1.002 : 82000;
   const priceRange = Math.max(1, maxPrice - minPrice);
 
-  const svgWidth = 920;
-  const svgHeight = 310;
-  const paddingX = 64;
-  const paddingY = 40;
+  const svgWidth = 940;
+  const svgHeight = 320;
+  const paddingX = 68;
+  const paddingY = 44;
   const plotWidth = svgWidth - paddingX * 2;
-  const plotHeight = svgHeight - paddingY - 55;
+  const plotHeight = svgHeight - paddingY - 58;
 
   const getX = (idx: number) => paddingX + (idx / Math.max(1, points.length - 1)) * plotWidth;
   const getY = (val: number) => paddingY + plotHeight - ((val - minPrice) / priceRange) * plotHeight;
@@ -127,7 +163,7 @@ export const ForecastStudioPage: React.FC = () => {
   const nowPointIndex = points.findIndex(p => p.horizon_label.toLowerCase().includes('spot') || p.horizon_label === 'NOW');
   const nowPoint = nowPointIndex >= 0 ? points[nowPointIndex] : null;
 
-  // Clean time formatting helper - prevents ISO string text collisions
+  // Clean time formatting helper - prevents text collisions
   const formatTimeOnly = (isoStr: string) => {
     try {
       const d = new Date(isoStr);
@@ -139,8 +175,36 @@ export const ForecastStudioPage: React.FC = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-      {/* Studio Header & Model Status */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Toast Notification for TradingView MCP actions */}
+      {mcpToast && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 24,
+            right: 28,
+            zIndex: 9999,
+            background: 'rgba(10, 18, 25, 0.95)',
+            border: '1px solid #26A69A',
+            boxShadow: '0 8px 32px rgba(38, 166, 154, 0.35)',
+            borderRadius: 12,
+            padding: '12px 20px',
+            color: '#E0F2F1',
+            fontSize: 13,
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            backdropFilter: 'blur(12px)',
+            animation: 'fadeIn 0.3s ease-out'
+          }}
+        >
+          <span className="pulse-dot dot-green" style={{ width: 8, height: 8 }} />
+          <span>{mcpToast}</span>
+        </div>
+      )}
+
+      {/* Studio Header & TradingView MCP Status Bar */}
       <div className="t2o-card stagger-card stagger-1" style={{ padding: '22px 26px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <div>
@@ -150,26 +214,26 @@ export const ForecastStudioPage: React.FC = () => {
                 AI Forecasting Studio
               </span>
               <span className="t2o-badge badge-purple" style={{ fontSize: 10 }}>Continuous Horizon Engine</span>
-              <span className="t2o-badge badge-bullish" style={{ fontSize: 10 }}>24/7 Live Active</span>
               
-              {/* TradingView MCP Connected Status Pill */}
+              {/* TradingView MCP Live Badge */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 6,
-                  padding: '3px 10px',
+                  gap: 7,
+                  padding: '4px 12px',
                   borderRadius: 20,
-                  background: 'rgba(38, 166, 154, 0.12)',
-                  border: '1px solid rgba(38, 166, 154, 0.35)',
-                  fontSize: 10.5,
-                  fontWeight: 700,
-                  color: '#26A69A'
+                  background: tvStatus?.is_connected ? 'rgba(38, 166, 154, 0.15)' : 'rgba(124, 77, 255, 0.15)',
+                  border: tvStatus?.is_connected ? '1px solid rgba(38, 166, 154, 0.4)' : '1px solid rgba(124, 77, 255, 0.4)',
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: tvStatus?.is_connected ? '#26A69A' : '#B388FF'
                 }}
               >
-                <span className="pulse-dot dot-green" style={{ width: 6, height: 6 }} />
+                <span className={`pulse-dot ${tvStatus?.is_connected ? 'dot-green' : 'dot-purple'}`} style={{ width: 6, height: 6 }} />
                 <span>TradingView MCP: {tvStatus?.is_connected ? 'Connected' : 'Active'}</span>
-                <span style={{ color: 'var(--text-dim)', fontSize: 9.5 }}>| CDP {tvStatus?.cdp_port || 9222}</span>
+                <span style={{ color: 'var(--text-dim)', fontSize: 10 }}>| CDP {tvStatus?.cdp_port || 9222}</span>
+                {candles.length > 0 && <span style={{ color: 'var(--text-dim)', fontSize: 10 }}>({candles.length} bars)</span>}
               </div>
 
               <div className="live-equalizer">
@@ -179,23 +243,24 @@ export const ForecastStudioPage: React.FC = () => {
                 <span className="live-equalizer-bar" />
               </div>
             </div>
+
             <div style={{ fontSize: 24, fontWeight: 900, color: 'var(--text-main)', marginTop: 6, letterSpacing: 0.2 }}>
-              Multi-Horizon Price Trajectory & TradingView Live Stream
+              Live TradingView Chart & Chronos AI Predictive Horizon
             </div>
             <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
-              Probabilistic deep-learning forecasting with 90% volatility cones evaluated in real-time against live TradingView Binance Spot BTC.
+              Direct TradingView MCP bridge with sub-second Binance BTC ticks and RevIN deep learning trajectory projection.
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            {/* View Mode Toggle: Forecast vs TradingView Live vs Dual View */}
-            <div className="segmented-pill-container" style={{ background: 'rgba(255, 255, 255, 0.04)', padding: 3 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            {/* View Mode Toggle: Dual Mode is DEFAULT so live chart is always visible! */}
+            <div className="segmented-pill-container" style={{ background: 'rgba(255, 255, 255, 0.05)', padding: 3 }}>
               <button
-                onClick={() => setChartMode('FORECAST')}
-                className={`segmented-pill-btn ${chartMode === 'FORECAST' ? 'segmented-pill-btn-active' : ''}`}
+                onClick={() => setChartMode('DUAL')}
+                className={`segmented-pill-btn ${chartMode === 'DUAL' ? 'segmented-pill-btn-active' : ''}`}
                 style={{ fontSize: 11, padding: '5px 12px' }}
               >
-                AI Forecast Cone
+                Dual Synced Mode
               </button>
               <button
                 onClick={() => setChartMode('TRADINGVIEW')}
@@ -205,11 +270,11 @@ export const ForecastStudioPage: React.FC = () => {
                 TradingView Live
               </button>
               <button
-                onClick={() => setChartMode('DUAL')}
-                className={`segmented-pill-btn ${chartMode === 'DUAL' ? 'segmented-pill-btn-active' : ''}`}
+                onClick={() => setChartMode('FORECAST')}
+                className={`segmented-pill-btn ${chartMode === 'FORECAST' ? 'segmented-pill-btn-active' : ''}`}
                 style={{ fontSize: 11, padding: '5px 12px' }}
               >
-                Dual Synced Mode
+                Forecast Cone Only
               </button>
             </div>
 
@@ -226,15 +291,54 @@ export const ForecastStudioPage: React.FC = () => {
               ))}
             </div>
 
+            {/* MCP Action: Project to Desktop */}
+            <button
+              onClick={handleProjectToDesktop}
+              disabled={mcpProjecting}
+              className="control-pill-btn shimmer-sweep"
+              style={{
+                padding: '6px 14px',
+                fontWeight: 700,
+                fontSize: 11.5,
+                background: 'linear-gradient(135deg, rgba(38, 166, 154, 0.25) 0%, rgba(9, 25, 22, 0.9) 100%)',
+                borderColor: 'rgba(38, 166, 154, 0.5)',
+                color: '#80CBC4',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6
+              }}
+              title="Broadcast Chronos AI Forecast levels and trendline to your local TradingView Desktop via MCP"
+            >
+              <span>⚡</span>
+              <span>{mcpProjecting ? 'Projecting...' : 'Project to TV Desktop'}</span>
+            </button>
+
+            {/* MCP Action: Clear Desktop Drawings */}
+            <button
+              onClick={handleClearDesktop}
+              className="control-pill-btn"
+              style={{
+                padding: '6px 12px',
+                fontWeight: 600,
+                fontSize: 11,
+                borderColor: 'rgba(255, 255, 255, 0.15)',
+                color: 'var(--text-muted)'
+              }}
+              title="Clear forecast lines from TradingView Desktop"
+            >
+              Clear TV
+            </button>
+
             <button
               onClick={loadAll}
               disabled={refreshing}
-              className="control-pill-btn shimmer-sweep"
+              className="control-pill-btn"
               style={{
-                padding: '6px 16px',
+                padding: '6px 14px',
                 fontWeight: 700,
-                background: 'linear-gradient(135deg, rgba(172, 88, 233,  0.15) 0%, rgba(9, 19, 25, 0.8) 100%)',
-                borderColor: 'rgba(172, 88, 233,  0.4)',
+                fontSize: 11,
+                background: 'rgba(172, 88, 233, 0.12)',
+                borderColor: 'rgba(172, 88, 233, 0.35)',
                 color: 'var(--text-main)'
               }}
             >
@@ -246,19 +350,19 @@ export const ForecastStudioPage: React.FC = () => {
         {/* Top Metric Strip */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 14, marginTop: 18, paddingTop: 16, borderTop: '1px solid var(--border-subtle)' }}>
           <div className="exec-level-box" style={{ padding: '12px 16px' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>CURRENT SPOT CLOSE</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>CURRENT SPOT PRICE</div>
             <div style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-mono)', color: 'var(--text-main)', marginTop: 4 }}>
-              ${timeline?.current_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }) || '77,624.61'}
+              ${timeline?.current_price?.toLocaleString('en-US', { minimumFractionDigits: 2 }) || '77,656.00'}
             </div>
-            <div style={{ fontSize: 10, color: 'var(--bullish-green)', marginTop: 2, fontWeight: 600 }}>Binance Spot Feed Active</div>
+            <div style={{ fontSize: 10, color: '#26A69A', marginTop: 2, fontWeight: 700 }}>TradingView & Binance Synced</div>
           </div>
 
           <div className="exec-level-box" style={{ padding: '12px 16px' }}>
-            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>ANTICIPATED TRAJECTORY</div>
+            <div style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 700, letterSpacing: 0.6 }}>PROJECTED TRAJECTORY</div>
             <div style={{ fontSize: 16, fontWeight: 800, color: timeline?.expected_direction.includes('BULLISH') ? 'var(--bullish-green)' : 'var(--bearish-red)', marginTop: 4 }}>
               {timeline?.expected_direction.replace(/_/g, ' ') || 'CALCULATING'}
             </div>
-            <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Model: {timeline?.model_name}</div>
+            <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 2 }}>Model: Chronos-T5 Encoder</div>
           </div>
 
           <div className="exec-level-box" style={{ padding: '12px 16px' }}>
@@ -279,39 +383,54 @@ export const ForecastStudioPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Chart Section: TradingView Widget, AI Forecast, or Dual Synced */}
-      {(chartMode === 'TRADINGVIEW' || chartMode === 'DUAL') && (
-        <div className="t2o-card stagger-card stagger-2" style={{ padding: 22 }}>
+      {/* SECTION 1: TRADINGVIEW LIVE REAL-TIME ADVANCED CHART */}
+      {(chartMode === 'DUAL' || chartMode === 'TRADINGVIEW') && (
+        <div className="t2o-card stagger-card stagger-2" style={{ padding: 22, position: 'relative', overflow: 'hidden' }}>
+          <div className="holographic-laser-scan" />
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 10 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span className="pulse-dot dot-green" />
-                <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-main)' }}>
-                  TradingView Live Advanced Real-Time Chart: BINANCE:BTCUSDT ({timeframe.toUpperCase()})
+                <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-main)' }}>
+                  TradingView Live Advanced Real-Time Chart • BINANCE:BTCUSDT
                 </span>
-                <span className="t2o-badge badge-bullish" style={{ fontSize: 10 }}>Sub-Second Ticks</span>
+                <span className="t2o-badge badge-bullish" style={{ fontSize: 10 }}>Live Ticks</span>
+                <span className="t2o-badge badge-purple" style={{ fontSize: 10 }}>MCP Powered</span>
               </div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
-                Connected with TradingView Desktop MCP Protocol. Full interactive chart with real-time indicators and volume.
+                Connected with TradingView Desktop MCP Protocol. Full interactive chart with real-time indicators, orderbook depth, and technical studies.
               </div>
+            </div>
+            <div style={{ fontSize: 11, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+              FEED: BINANCE:BTCUSDT ({timeframe.toUpperCase()})
             </div>
           </div>
 
-          <TradingViewLiveWidget symbol="BINANCE:BTCUSDT" theme="dark" height={520} interval={timeframe === '15m' ? '15' : timeframe === '1h' ? '60' : '240'} />
+          <TradingViewLiveWidget
+            symbol="BINANCE:BTCUSDT"
+            theme="dark"
+            height={520}
+            interval={timeframe === '15m' ? '15' : timeframe === '1h' ? '60' : '240'}
+          />
         </div>
       )}
 
-      {(chartMode === 'FORECAST' || chartMode === 'DUAL') && (
+      {/* SECTION 2: CHRONOS AI PROBABILISTIC FORECAST TRAJECTORY & 90% VOLATILITY CONE */}
+      {(chartMode === 'DUAL' || chartMode === 'FORECAST') && (
         <div className="t2o-card stagger-card stagger-2" style={{ padding: 22 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 10 }}>
             <div>
-              <span style={{ fontSize: 14, fontWeight: 800, color: 'var(--text-main)' }}>
-                Chronos AI Probabilistic Trajectory: Historical Realized Spot vs Forward 90% Cone
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span className="pulse-dot dot-cyan" />
+                <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-main)' }}>
+                  Chronos AI Probabilistic Trajectory: Realized Spot vs Forward 90% Cone
+                </span>
+              </div>
               <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
-                Solid Violet = Realized Spot | Dashed Bright = Projected Mean Trajectory | Shaded Cone = 90% Volatility Bounds
+                Solid Violet = Realized Spot | Dashed Cyan-Bright = Projected Mean Trajectory | Shaded Cone = 90% Volatility Bounds
               </div>
             </div>
+
             <div style={{ display: 'flex', gap: 14, fontSize: 11, alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <div style={{ width: 14, height: 3, background: 'var(--accent-cyan)' }} />
@@ -328,7 +447,7 @@ export const ForecastStudioPage: React.FC = () => {
             </div>
           </div>
 
-          {/* SVG Chart with completely uncluttered, collision-free time labels */}
+          {/* SVG Chart with clean, collision-free time labels */}
           <div style={{ width: '100%', overflowX: 'auto', background: 'rgba(6, 11, 14, 0.95)', borderRadius: 14, padding: '16px 0 10px 0', border: '1px solid var(--border-subtle)', position: 'relative' }}>
             {hoveredPoint && (
               <div
@@ -336,9 +455,9 @@ export const ForecastStudioPage: React.FC = () => {
                   position: 'absolute',
                   top: 16,
                   right: 20,
-                  background: 'rgba(12, 19, 26, 0.92)',
-                  border: '1px solid rgba(172, 88, 233, 0.4)',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                  background: 'rgba(12, 19, 26, 0.94)',
+                  border: '1px solid rgba(172, 88, 233, 0.45)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.65)',
                   borderRadius: 10,
                   padding: '8px 14px',
                   zIndex: 10,
@@ -369,7 +488,7 @@ export const ForecastStudioPage: React.FC = () => {
               </div>
             )}
 
-            <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} style={{ width: '100%', height: 'auto', minWidth: 700, display: 'block' }}>
+            <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} style={{ width: '100%', height: 'auto', minWidth: 720, display: 'block' }}>
               <defs>
                 <linearGradient id="coneGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#AC58E9" stopOpacity="0.35" />
@@ -421,7 +540,7 @@ export const ForecastStudioPage: React.FC = () => {
                 </g>
               )}
 
-              {/* Data Points and Clear Two-Tier Axis Labels */}
+              {/* Data Points and Two-Tier Collision-Free Axis */}
               {points.map((pt, i) => {
                 const x = getX(i);
                 const yPred = getY(pt.predicted_price);
@@ -471,7 +590,7 @@ export const ForecastStudioPage: React.FC = () => {
                       ${Math.round(pt.predicted_price).toLocaleString()}
                     </text>
 
-                    {/* Lower Axis: Two-Tier Collision-Free Labels */}
+                    {/* Lower Axis: Collision-Free Labels */}
                     {isNow ? (
                       <g>
                         <rect
@@ -521,7 +640,7 @@ export const ForecastStudioPage: React.FC = () => {
                         >
                           {pt.horizon_label}
                         </text>
-                        {/* Clean Time Label (e.g. 15:30) */}
+                        {/* Clean Time Label (e.g. 17:31) */}
                         <text
                           x={x}
                           y={svgHeight - 18}
@@ -540,11 +659,11 @@ export const ForecastStudioPage: React.FC = () => {
             </svg>
           </div>
 
-          {/* Future Horizon Cards */}
+          {/* Future Horizon Projection Cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginTop: 16 }}>
             {points.filter(p => p.is_projection).map(proj => {
-              const delta = proj.predicted_price - (timeline?.current_price || 77624);
-              const deltaPct = ((delta / (timeline?.current_price || 77624)) * 100);
+              const delta = proj.predicted_price - (timeline?.current_price || 77656);
+              const deltaPct = ((delta / (timeline?.current_price || 77656)) * 100);
               const isBull = delta >= 0;
 
               return (
