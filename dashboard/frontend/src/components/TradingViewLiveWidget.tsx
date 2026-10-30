@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, memo } from 'react';
+import { ContinuousForecastTimeline } from '../types';
 
 interface TradingViewLiveWidgetProps {
   symbol?: string;
@@ -6,6 +7,9 @@ interface TradingViewLiveWidgetProps {
   height?: number | string;
   interval?: string;
   autosize?: boolean;
+  timeline?: ContinuousForecastTimeline | null;
+  onProjectToTradingView?: () => void;
+  isProjectingToTv?: boolean;
 }
 
 export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(({
@@ -13,23 +17,18 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
   theme = 'dark',
   height = 540,
   interval = '15',
-  autosize = true
+  autosize = true,
+  timeline = null,
+  onProjectToTradingView,
+  isProjectingToTv = false
 }) => {
   const [embedMode, setEmbedMode] = useState<'advanced' | 'classic'>('advanced');
   const [loading, setLoading] = useState(true);
   const [reloadKey, setReloadKey] = useState(0);
-  const [loadTimedOut, setLoadTimedOut] = useState(false);
 
   // Reset loading whenever symbol, interval, embedMode or reloadKey changes
   useEffect(() => {
     setLoading(true);
-    setLoadTimedOut(false);
-
-    const timer = setTimeout(() => {
-      setLoadTimedOut(true);
-    }, 5000);
-
-    return () => clearTimeout(timer);
   }, [symbol, interval, embedMode, reloadKey]);
 
   // Build the advanced widget URL
@@ -58,7 +57,7 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
     return `https://www.tradingview-widget.com/embed-widget/advanced-chart/?locale=en#${hash}`;
   }, [autosize, symbol, interval, theme]);
 
-  // Build the classic embed URL (highest compatibility, bypasses aggressive blockers)
+  // Build the classic embed URL
   const classicUrl = useMemo(() => {
     const params = new URLSearchParams({
       symbol: symbol,
@@ -86,6 +85,14 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
     window.open(`https://www.tradingview.com/chart/?symbol=${tvSymbol}`, '_blank', 'noopener,noreferrer');
   };
 
+  // Forecast points summary
+  const forecastPoints = timeline?.forecast_points?.filter(p => p.is_projection) || [];
+  const finalPoint = forecastPoints.length > 0 ? forecastPoints[forecastPoints.length - 1] : null;
+  const currentSpot = timeline?.current_price || (forecastPoints.length > 0 ? forecastPoints[0].predicted_price : 77500);
+  const driftPct = finalPoint
+    ? (((finalPoint.predicted_price - currentSpot) / currentSpot) * 100).toFixed(2)
+    : '+0.00';
+
   return (
     <div
       className="tradingview-live-widget-wrapper"
@@ -112,7 +119,9 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
           borderBottom: '1px solid rgba(172, 88, 233, 0.15)',
           fontSize: 11,
           fontWeight: 700,
-          zIndex: 5
+          zIndex: 5,
+          flexWrap: 'wrap',
+          gap: 8
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -127,7 +136,7 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
               fontSize: 10
             }}
           >
-            {interval}m Live Ticks
+            {interval}m Real-Time Ticks
           </span>
           <span
             style={{
@@ -138,12 +147,34 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
               gap: 4
             }}
           >
-            <span>Mode:</span>
+            <span>Engine:</span>
             <span style={{ color: '#B388FF' }}>{embedMode === 'advanced' ? 'Advanced Pro' : 'Classic Bridge'}</span>
           </span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {/* Project to Desktop MCP Button */}
+          {onProjectToTradingView && (
+            <button
+              type="button"
+              onClick={onProjectToTradingView}
+              disabled={isProjectingToTv}
+              title="Project forecast trendlines directly to TradingView Desktop via MCP"
+              style={{
+                background: 'linear-gradient(135deg, rgba(38, 166, 154, 0.25), rgba(124, 77, 255, 0.25))',
+                border: '1px solid rgba(38, 166, 154, 0.5)',
+                color: '#80CBC4',
+                padding: '4px 12px',
+                borderRadius: 6,
+                fontSize: 10,
+                fontWeight: 800,
+                cursor: isProjectingToTv ? 'wait' : 'pointer'
+              }}
+            >
+              {isProjectingToTv ? '⏳ Projecting...' : '⚡ Project to TV Desktop'}
+            </button>
+          )}
+
           {/* Switch Mode Button */}
           <button
             type="button"
@@ -157,11 +188,10 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
               borderRadius: 6,
               fontSize: 10,
               fontWeight: 700,
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              cursor: 'pointer'
             }}
           >
-            {embedMode === 'advanced' ? '⇄ Try Classic Engine' : '⇄ Use Pro Engine'}
+            {embedMode === 'advanced' ? '⇄ Classic Engine' : '⇄ Pro Engine'}
           </button>
 
           {/* Refresh Button */}
@@ -202,6 +232,50 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
         </div>
       </div>
 
+      {/* Kronos AI Forecast Overlay HUD Strip */}
+      {finalPoint && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '6px 16px',
+            background: 'rgba(17, 10, 30, 0.95)',
+            borderBottom: '1px solid rgba(172, 88, 233, 0.3)',
+            fontSize: 11,
+            color: '#E0F2F1',
+            zIndex: 4,
+            flexWrap: 'wrap',
+            gap: 8
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            <span style={{ color: '#E0B0FF', fontWeight: 800 }}>⚡ KRONOS AI HORIZON:</span>
+            <span>
+              Spot: <strong style={{ color: '#00F5FF' }}>${currentSpot.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</strong>
+            </span>
+            <span>➔</span>
+            <span>
+              Target 90m: <strong style={{ color: Number(driftPct) >= 0 ? '#00E676' : '#FF5252' }}>
+                ${finalPoint.predicted_price.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ({Number(driftPct) >= 0 ? `+${driftPct}` : driftPct}%)
+              </strong>
+            </span>
+            <span style={{ color: 'var(--text-dim)' }}>|</span>
+            <span style={{ color: '#D1C4E9' }}>
+              90% Volatility Cone: [${finalPoint.lower_bound_90.toFixed(0)} — ${finalPoint.upper_bound_90.toFixed(0)}]
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10, color: 'var(--text-dim)' }}>
+            {forecastPoints.slice(0, 4).map((pt, i) => (
+              <span key={i} style={{ padding: '1px 6px', borderRadius: 4, background: 'rgba(124, 77, 255, 0.15)', color: '#B388FF' }}>
+                +{((i + 1) * 15)}m: ${pt.predicted_price.toFixed(0)}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Main Chart Area */}
       <div style={{ flex: 1, position: 'relative', width: '100%', height: '100%', minHeight: 0 }}>
         {/* Loading Spinner / Skeleton */}
@@ -235,55 +309,6 @@ export const TradingViewLiveWidget: React.FC<TradingViewLiveWidgetProps> = memo(
             <div style={{ color: 'var(--text-dim)', fontSize: 11 }}>
               Streaming {symbol} • Interval {interval} • Sub-second tick pipeline
             </div>
-          </div>
-        )}
-
-        {/* Browser Shield / AdBlock Warning Banner if loading takes over 5s */}
-        {loadTimedOut && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 12,
-              left: 20,
-              right: 20,
-              background: 'rgba(26, 17, 43, 0.95)',
-              border: '1px solid rgba(255, 171, 0, 0.5)',
-              borderRadius: 8,
-              padding: '10px 16px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              fontSize: 12,
-              color: '#FFE082',
-              zIndex: 4,
-              boxShadow: '0 8px 24px rgba(0,0,0,0.6)'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span>⚠️</span>
-              <span>
-                Chart taking longer to display? In <strong>Brave browser</strong> or ad-blockers, allow TradingView scripts or click:
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                setEmbedMode('classic');
-                setLoadTimedOut(false);
-              }}
-              style={{
-                background: '#FFB300',
-                color: '#000',
-                border: 'none',
-                borderRadius: 6,
-                padding: '4px 12px',
-                fontWeight: 800,
-                cursor: 'pointer',
-                fontSize: 11
-              }}
-            >
-              Switch to Classic Engine
-            </button>
           </div>
         )}
 
