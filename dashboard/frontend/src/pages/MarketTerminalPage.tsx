@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MarketDataSnapshot, IndicatorSnapshot, MarketRegimeSnapshot, TimeFrame } from '../types';
 import { CandlestickChart } from '../components/CandlestickChart';
+import { TradingViewLiveWidget } from '../components/TradingViewLiveWidget';
 import { CosmicParticleSphere3D } from '../components/CosmicParticleSphere3D';
 import { GenomeDoubleHelix3D } from '../components/GenomeDoubleHelix3D';
 import { ElectricCyberRing3D } from '../components/ElectricCyberRing3D';
@@ -28,6 +29,7 @@ export const MarketTerminalPage: React.FC<Props> = ({
 }) => {
   const [showLayerA, setShowLayerA] = useState(true);
   const [showLayerB, setShowLayerB] = useState(false);
+  const [chartEngine, setChartEngine] = useState<'canvas' | 'tradingview'>('canvas');
 
   const curPrice = snapshot?.latest_candle?.close || 0;
   const prevClose = snapshot?.candles && snapshot.candles.length > 1 ? snapshot.candles[snapshot.candles.length - 2].close : curPrice;
@@ -138,6 +140,25 @@ export const MarketTerminalPage: React.FC<Props> = ({
               Layer B (9/21 Adv)
             </button>
 
+            {/* Engine Switcher */}
+            <div className="segmented-pill-container" style={{ background: 'rgba(255, 255, 255, 0.04)', padding: 3 }}>
+              <button
+                onClick={() => setChartEngine('canvas')}
+                className={`segmented-pill-btn ${chartEngine === 'canvas' ? 'segmented-pill-btn-active' : ''}`}
+                style={{ fontSize: 11, padding: '4px 10px' }}
+              >
+                Quant Canvas
+              </button>
+              <button
+                onClick={() => setChartEngine('tradingview')}
+                className={`segmented-pill-btn ${chartEngine === 'tradingview' ? 'segmented-pill-btn-active' : ''}`}
+                style={{ fontSize: 11, padding: '4px 10px', display: 'flex', alignItems: 'center', gap: 5 }}
+              >
+                <span className="pulse-dot dot-green" style={{ width: 5, height: 5 }} />
+                TradingView
+              </button>
+            </div>
+
             {/* Refresh Action Button */}
             <button
               onClick={onRefresh}
@@ -160,12 +181,21 @@ export const MarketTerminalPage: React.FC<Props> = ({
         </div>
 
         {/* Chart Rendering */}
-        <CandlestickChart
-          candles={snapshot?.candles || []}
-          timeframe={timeframe}
-          showLayerA={showLayerA}
-          showLayerB={showLayerB}
-        />
+        {chartEngine === 'tradingview' ? (
+          <TradingViewLiveWidget
+            symbol="BINANCE:BTCUSDT"
+            theme="dark"
+            height={440}
+            interval={timeframe === '15m' ? '15' : timeframe === '1h' ? '60' : timeframe === '4h' ? '240' : 'D'}
+          />
+        ) : (
+          <CandlestickChart
+            candles={snapshot?.candles || []}
+            timeframe={timeframe}
+            showLayerA={showLayerA}
+            showLayerB={showLayerB}
+          />
+        )}
       </div>
 
       {/* 3D QUANTUM HEURISTICS & EXECUTION CYBER DECK (PINTEREST REFERENCES) */}

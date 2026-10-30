@@ -886,6 +886,49 @@ def get_meta_label_assessment(
 
 
 # ============================================================================
+# 8b. TradingView MCP Desktop Bridge & Live Status Endpoints
+# ============================================================================
+
+@app.get("/api/tradingview/status")
+def get_tradingview_status():
+    """Checks TradingView Desktop Chrome DevTools Protocol (CDP) connectivity on port 9222."""
+    import urllib.request
+    try:
+        req = urllib.request.Request("http://127.0.0.1:9222/json/version", headers={"User-Agent": "Trade2Options-Backend/1.0"})
+        with urllib.request.urlopen(req, timeout=1.5) as resp:
+            version_data = json.loads(resp.read().decode())
+        
+        # Check active chart tab
+        chart_title = "TradingView Chart"
+        try:
+            req_list = urllib.request.Request("http://127.0.0.1:9222/json/list", headers={"User-Agent": "Trade2Options-Backend/1.0"})
+            with urllib.request.urlopen(req_list, timeout=1.5) as resp_list:
+                targets = json.loads(resp_list.read().decode())
+                chart_target = next((t for t in targets if "tradingview.com/chart" in t.get("url", "").lower()), None)
+                if chart_target:
+                    chart_title = chart_target.get("title", chart_title)
+        except Exception:
+            pass
+
+        return {
+            "is_connected": True,
+            "cdp_port": 9222,
+            "browser": version_data.get("Browser", "TradingView Desktop"),
+            "chart_title": chart_title,
+            "symbol": "BINANCE:BTCUSDT",
+            "message": "TradingView Desktop MCP Connected (CDP Port 9222)"
+        }
+    except Exception as e:
+        return {
+            "is_connected": False,
+            "cdp_port": 9222,
+            "symbol": "BINANCE:BTCUSDT",
+            "message": "TradingView Desktop MCP Standby (Embedded Widget Active)"
+        }
+
+
+
+# ============================================================================
 # 9. Static Frontend Mount
 # ============================================================================
 
