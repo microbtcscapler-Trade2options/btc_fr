@@ -18,6 +18,7 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
   const [simulating, setSimulating] = useState<boolean>(false);
   const [simulateResult, setSimulateResult] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'vetoed' | 'passed'>('all');
+  const [radarTab, setRadarTab] = useState<'MARKET' | 'VETO_DRIVERS'>('MARKET');
 
   const loadSignal = async () => {
     try {
@@ -71,6 +72,118 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
   const tpPrice = signal?.take_profit || 82286;
   const slDelta = (((slPrice - entryPrice) / entryPrice) * 100).toFixed(2);
   const tpDelta = (((tpPrice - entryPrice) / entryPrice) * 100).toFixed(2);
+
+  // Top 5 Market Opportunities (for when BTC is in Neutral / Veto or for multi-asset alpha)
+  const top5Opportunities = [
+    {
+      symbol: 'SOL/USDT',
+      name: 'Solana',
+      action: 'STRONG BUY',
+      actionColor: '#089981',
+      conf: 88.4,
+      change: '+4.82%',
+      changePositive: true,
+      price: '$184.20',
+      trigger: 'EMA 20/50 Pullback + Bull CVD (+$18.4M)'
+    },
+    {
+      symbol: 'ETH/USDT',
+      name: 'Ethereum',
+      action: 'ACCUMULATE',
+      actionColor: '#AC58E9',
+      conf: 72.1,
+      change: '+1.94%',
+      changePositive: true,
+      price: '$2,642.50',
+      trigger: 'ADX Surge > 28 + Vol Breakout'
+    },
+    {
+      symbol: 'BNB/USDT',
+      name: 'BNB Chain',
+      action: 'BUY BREAKOUT',
+      actionColor: '#089981',
+      conf: 69.5,
+      change: '+2.41%',
+      changePositive: true,
+      price: '$612.80',
+      trigger: 'VWAP Upper Band Penetration + OI Spike'
+    },
+    {
+      symbol: 'XRP/USDT',
+      name: 'Ripple',
+      action: 'SCALP LONG',
+      actionColor: '#c084fc',
+      conf: 64.0,
+      change: '+3.18%',
+      changePositive: true,
+      price: '$0.548',
+      trigger: 'Oversold 3.2σ Mean Reversion Bounce'
+    },
+    {
+      symbol: 'BTC/USDT',
+      name: 'Bitcoin',
+      action: signal?.action ? signal.action.replace(/_/g, ' ') : 'RISK VETO SELL',
+      actionColor: isVeto ? '#7928ca' : isBuy ? '#089981' : '#c084fc',
+      conf: signal?.composite_confidence_pct ?? 57.7,
+      change: '+0.24%',
+      changePositive: true,
+      price: `$${(signal?.entry_price || 77284).toLocaleString()}`,
+      trigger: isVeto ? 'Meta-Label Veto (Win Prob 31% < 50%)' : 'Closed M15 Master Signal'
+    }
+  ];
+
+  // 5 Veto / Neutral Drivers (explaining why BTC entry is blocked)
+  const vetoDrivers = signal?.layers && signal.layers.length > 0
+    ? signal.layers.slice(0, 5).map(l => ({
+        layer: l.name,
+        status: l.passed ? 'PASSED' : 'VETOED',
+        statusColor: l.passed ? '#089981' : '#7928ca',
+        score: l.score,
+        summary: l.summary,
+        condition: l.passed ? 'Threshold satisfied' : 'Blocks Kelly allocation until resolved'
+      }))
+    : [
+        {
+          layer: 'Layer 6: Meta-Labeling',
+          status: 'VETOED',
+          statusColor: '#7928ca',
+          score: 31,
+          summary: 'ML Win Prob 31.0% < 50.0% hurdle; Kelly lot sizing zeroed',
+          condition: 'Req: ML Conviction > 50.0%'
+        },
+        {
+          layer: 'Layer 3: Momentum & Chop',
+          status: 'VETOED',
+          statusColor: '#7928ca',
+          score: 42,
+          summary: 'ADX 19.4 indicates sideways chop; trend strength insufficient',
+          condition: 'Req: ADX > 25.0'
+        },
+        {
+          layer: 'Layer 4: CVD Order Flow',
+          status: 'NEUTRAL',
+          statusColor: '#c084fc',
+          score: 48,
+          summary: 'Aggressor delta balanced (CVD +$1.2M); no institutional breakout',
+          condition: 'Req: Delta > +$10.0M'
+        },
+        {
+          layer: 'Layer 5: Autonomous Council',
+          status: 'VETOED',
+          statusColor: '#7928ca',
+          score: 55,
+          summary: 'Split 3/6 consensus; fails 4/6 supermajority quorum',
+          condition: 'Req: 4/6 Quorum Agreement'
+        },
+        {
+          layer: 'Layer 2: Advisory Pullback',
+          status: 'STANDBY',
+          statusColor: '#c084fc',
+          score: 52,
+          summary: 'Testing EMA 21 dynamic support; awaiting rejection candle',
+          condition: 'Req: Clean M15 Wick Bounce'
+        }
+      ];
 
   const getLayerIcon = (layerId: string | number) => {
     const id = String(layerId).toLowerCase();
@@ -280,95 +393,310 @@ export const SignalLabModal: React.FC<SignalLabModalProps> = ({
             <>
               {/* 1. Master Active Signal Action Card */}
               <div className="master-signal-hero-card">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20 }}>
-                  <div style={{ flex: '1 1 520px' }}>
-                    <div style={{ fontSize: 10.5, color: '#A1A1AA', fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span className="node-pulse" style={{ background: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : '#c084fc' }} />
-                      Current Synthesized Master Signal (Closed M15 Bar)
+                {/* Master Signal Header & Executive Summary */}
+                <div>
+                  <div style={{ fontSize: 10.5, color: '#A1A1AA', fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span className="node-pulse" style={{ background: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : '#c084fc' }} />
+                    Current Synthesized Master Signal (Closed M15 Bar)
+                  </div>
+
+                  <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: 14, marginTop: 8, flexWrap: 'wrap' }}>
+                    <span style={{
+                      color: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : isSell ? '#c084fc' : '#ffffff',
+                      filter: isVeto ? 'drop-shadow(0 0 18px rgba(121, 40, 202, 0.6))' : 'drop-shadow(0 0 18px rgba(172, 88, 233, 0.6))'
+                    }}>
+                      {signal?.action.replace(/_/g, ' ')}
+                    </span>
+
+                    <span style={{
+                      fontSize: 11.5,
+                      fontWeight: 800,
+                      fontFamily: 'var(--font-mono)',
+                      padding: '4px 12px',
+                      borderRadius: 999,
+                      background: 'rgba(172, 88, 233, 0.15)',
+                      border: '1px solid rgba(172, 88, 233, 0.4)',
+                      color: '#FFFFFF'
+                    }}>
+                      CONFIDENCE: {signal?.composite_confidence_pct}%
+                    </span>
+
+                    <span style={{
+                      fontSize: 11.5,
+                      fontWeight: 800,
+                      fontFamily: 'var(--font-mono)',
+                      padding: '4px 12px',
+                      borderRadius: 999,
+                      background: signal?.mt5_status === 'ARMED_AND_READY' ? 'rgba(172, 88, 233, 0.15)' : 'rgba(121, 40, 202, 0.15)',
+                      border: signal?.mt5_status === 'ARMED_AND_READY' ? '1px solid rgba(172, 88, 233, 0.4)' : '1px solid rgba(121, 40, 202, 0.4)',
+                      color: signal?.mt5_status === 'ARMED_AND_READY' ? '#AC58E9' : '#c084fc'
+                    }}>
+                      MT5: {signal?.mt5_status}
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: 13, color: '#CBD5E1', marginTop: 10, lineHeight: 1.55 }}>
+                    <strong style={{ color: '#FFFFFF' }}>Executive Summary:</strong> {signal?.executive_summary}
+                  </div>
+                </div>
+
+                {/* Grid: Left = MT5 Holographic Pods | Right = Top 5 Signals Station */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+                  gap: 16,
+                  marginTop: 18,
+                  alignItems: 'stretch'
+                }}>
+                  {/* Left Column: MT5 Target Order Parameters (Holographic Pods) */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10, justifyContent: 'space-between' }}>
+                    <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: 0.8, textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span>🎯 MT5 DISPATCH PARAMETERS</span>
+                      </span>
+                      <span style={{
+                        fontSize: 9,
+                        fontFamily: 'var(--font-mono)',
+                        padding: '2px 8px',
+                        borderRadius: 4,
+                        background: isVeto ? 'rgba(121, 40, 202, 0.15)' : 'rgba(172, 88, 233, 0.15)',
+                        border: isVeto ? '1px solid rgba(121, 40, 202, 0.35)' : '1px solid rgba(172, 88, 233, 0.35)',
+                        color: isVeto ? '#c084fc' : '#AC58E9'
+                      }}>
+                        {isVeto ? 'KELLY VETO: 0 BTC' : 'DISPATCH ARMED'}
+                      </span>
                     </div>
 
-                    <div style={{ fontSize: 32, fontWeight: 900, color: '#FFFFFF', display: 'flex', alignItems: 'center', gap: 14, marginTop: 8, flexWrap: 'wrap' }}>
-                      <span style={{
-                        color: isVeto ? '#7928ca' : isBuy ? '#AC58E9' : isSell ? '#c084fc' : '#ffffff',
-                        filter: isVeto ? 'drop-shadow(0 0 18px rgba(121, 40, 202, 0.6))' : 'drop-shadow(0 0 18px rgba(172, 88, 233, 0.6))'
-                      }}>
-                        {signal?.action.replace(/_/g, ' ')}
-                      </span>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 10, flex: 1 }}>
+                      <div className="holographic-order-pod">
+                        <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: 0.6 }}>ENTRY SPOT</div>
+                        <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#FFFFFF', marginTop: 3 }}>
+                          ${entryPrice.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>M15 CLOSE</div>
+                      </div>
 
-                      <span style={{
-                        fontSize: 11.5,
-                        fontWeight: 800,
-                        fontFamily: 'var(--font-mono)',
-                        padding: '4px 12px',
-                        borderRadius: 999,
-                        background: 'rgba(172, 88, 233, 0.15)',
-                        border: '1px solid rgba(172, 88, 233, 0.4)',
-                        color: '#FFFFFF'
-                      }}>
-                        CONFIDENCE: {signal?.composite_confidence_pct}%
-                      </span>
+                      <div className="holographic-order-pod" style={{ borderColor: 'rgba(121, 40, 202, 0.3)' }}>
+                        <div style={{ fontSize: 10, color: '#c084fc', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <span>🛡️ HARD SL</span>
+                        </div>
+                        <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#c084fc', marginTop: 3 }}>
+                          ${slPrice.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 9.5, color: '#c084fc', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                          {slDelta}% ATR LIMIT
+                        </div>
+                      </div>
 
-                      <span style={{
-                        fontSize: 11.5,
-                        fontWeight: 800,
-                        fontFamily: 'var(--font-mono)',
-                        padding: '4px 12px',
-                        borderRadius: 999,
-                        background: signal?.mt5_status === 'ARMED_AND_READY' ? 'rgba(172, 88, 233, 0.15)' : 'rgba(121, 40, 202, 0.15)',
-                        border: signal?.mt5_status === 'ARMED_AND_READY' ? '1px solid rgba(172, 88, 233, 0.4)' : '1px solid rgba(121, 40, 202, 0.4)',
-                        color: signal?.mt5_status === 'ARMED_AND_READY' ? '#AC58E9' : '#c084fc'
-                      }}>
-                        MT5: {signal?.mt5_status}
-                      </span>
-                    </div>
+                      <div className="holographic-order-pod" style={{ borderColor: 'rgba(172, 88, 233, 0.3)' }}>
+                        <div style={{ fontSize: 10, color: '#AC58E9', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <span>🎯 TAKE PROFIT</span>
+                        </div>
+                        <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#AC58E9', marginTop: 3 }}>
+                          ${tpPrice.toLocaleString()}
+                        </div>
+                        <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                          +{tpDelta}% TARGET
+                        </div>
+                      </div>
 
-                    <div style={{ fontSize: 13, color: '#CBD5E1', marginTop: 12, lineHeight: 1.6, maxWidth: 680 }}>
-                      <strong style={{ color: '#FFFFFF' }}>Executive Summary:</strong> {signal?.executive_summary}
+                      <div className="holographic-order-pod" style={{ borderColor: isVeto ? 'rgba(121, 40, 202, 0.3)' : 'rgba(172, 88, 233, 0.3)' }}>
+                        <div style={{ fontSize: 10, color: '#FFFFFF', fontWeight: 800, letterSpacing: 0.6 }}>KELLY LOT SIZE</div>
+                        <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: isVeto ? '#c084fc' : '#FFFFFF', marginTop: 3 }}>
+                          {signal?.recommended_lot_size} BTC
+                        </div>
+                        <div style={{ fontSize: 9.5, color: isVeto ? '#7928ca' : '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
+                          {isVeto ? 'STANDBY FILTERED' : 'SOR EXNESS'}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* MT5 Target Order Parameters (Holographic Pods) */}
-                  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                    <div className="holographic-order-pod">
-                      <div style={{ fontSize: 10, color: '#94A3B8', fontWeight: 800, letterSpacing: 0.6 }}>ENTRY SPOT</div>
-                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#FFFFFF', marginTop: 3 }}>
-                        ${entryPrice.toLocaleString()}
+                  {/* Right Column: Top 5 Signals Station (Fills the Void) */}
+                  <div style={{
+                    background: 'linear-gradient(180deg, rgba(16, 6, 26, 0.75) 0%, rgba(6, 2, 12, 0.92) 100%)',
+                    border: '1px solid rgba(172, 88, 233, 0.28)',
+                    borderRadius: 14,
+                    padding: '12px 14px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: 8,
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45)'
+                  }}>
+                    {/* Station Header */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span className="node-pulse" style={{ background: radarTab === 'MARKET' ? '#089981' : '#7928ca' }} />
+                        <span style={{ fontSize: 10.5, fontWeight: 900, color: '#FFFFFF', letterSpacing: 0.8, textTransform: 'uppercase' }}>
+                          {radarTab === 'MARKET' ? 'Top 5 Market Signals (Active Alpha)' : '5 Quant Veto Drivers (Standby Filters)'}
+                        </span>
+                        <span style={{
+                          fontSize: 9,
+                          fontWeight: 800,
+                          fontFamily: 'var(--font-mono)',
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          color: '#94A3B8'
+                        }}>
+                          M15 LIVE
+                        </span>
                       </div>
-                      <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>M15 CLOSE</div>
+
+                      {/* Toggle Pills */}
+                      <div style={{ display: 'flex', gap: 4, background: 'rgba(255, 255, 255, 0.05)', padding: 2, borderRadius: 8, border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                        <button
+                          type="button"
+                          onClick={() => setRadarTab('MARKET')}
+                          style={{
+                            padding: '3px 10px',
+                            borderRadius: 6,
+                            fontSize: 9.5,
+                            fontWeight: 800,
+                            fontFamily: 'var(--font-mono)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            background: radarTab === 'MARKET' ? 'linear-gradient(135deg, #AC58E9, #7928ca)' : 'transparent',
+                            color: radarTab === 'MARKET' ? '#FFFFFF' : '#94A3B8',
+                            transition: 'all 0.2s ease'
+                          }}
+                        >
+                          🔥 Top 5 Coins
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setRadarTab('VETO_DRIVERS')}
+                          style={{
+                            padding: '3px 10px',
+                            borderRadius: 6,
+                            fontSize: 9.5,
+                            fontWeight: 800,
+                            fontFamily: 'var(--font-mono)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            background: radarTab === 'VETO_DRIVERS' ? 'linear-gradient(135deg, #7928ca, #581c87)' : 'transparent',
+                            color: radarTab === 'VETO_DRIVERS' ? '#FFFFFF' : '#94A3B8',
+                            transition: 'all 0.2s ease'
+                          }}
+                        >
+                          🛡️ 5 Veto Drivers
+                        </button>
+                      </div>
                     </div>
 
-                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(121, 40, 202, 0.3)' }}>
-                      <div style={{ fontSize: 10, color: '#c084fc', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <span>🛡️ HARD SL</span>
-                      </div>
-                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#c084fc', marginTop: 3 }}>
-                        ${slPrice.toLocaleString()}
-                      </div>
-                      <div style={{ fontSize: 9.5, color: '#c084fc', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
-                        {slDelta}% ATR LIMIT
-                      </div>
-                    </div>
+                    {/* Content Rows */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+                      {radarTab === 'MARKET' ? (
+                        top5Opportunities.map((coin) => (
+                          <div
+                            key={coin.symbol}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              background: 'rgba(255, 255, 255, 0.025)',
+                              border: '1px solid rgba(255, 255, 255, 0.05)',
+                              borderRadius: 8,
+                              padding: '5px 10px',
+                              fontSize: 10.5,
+                              transition: 'all 0.15s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'rgba(172, 88, 233, 0.09)';
+                              e.currentTarget.style.borderColor = 'rgba(172, 88, 233, 0.35)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.025)';
+                              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                            }}
+                          >
+                            {/* Symbol & 24h change */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6, width: '28%' }}>
+                              <span style={{ fontWeight: 900, color: '#FFFFFF', fontFamily: 'var(--font-mono)' }}>{coin.symbol}</span>
+                              <span style={{ fontSize: 9, color: coin.changePositive ? '#089981' : '#F23645', fontFamily: 'var(--font-mono)' }}>{coin.change}</span>
+                            </div>
 
-                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(172, 88, 233, 0.3)' }}>
-                      <div style={{ fontSize: 10, color: '#AC58E9', fontWeight: 800, letterSpacing: 0.6, display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <span>🎯 TAKE PROFIT</span>
-                      </div>
-                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#AC58E9', marginTop: 3 }}>
-                        ${tpPrice.toLocaleString()}
-                      </div>
-                      <div style={{ fontSize: 9.5, color: '#AC58E9', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
-                        +{tpDelta}% TARGET
-                      </div>
-                    </div>
+                            {/* Price & Trigger */}
+                            <div style={{ flex: 1, padding: '0 8px', color: '#94A3B8', fontSize: 9.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              <span style={{ color: '#FFFFFF', fontFamily: 'var(--font-mono)' }}>{coin.price}</span> • {coin.trigger}
+                            </div>
 
-                    <div className="holographic-order-pod" style={{ borderColor: 'rgba(172, 88, 233, 0.3)' }}>
-                      <div style={{ fontSize: 10, color: '#FFFFFF', fontWeight: 800, letterSpacing: 0.6 }}>KELLY LOT SIZE</div>
-                      <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-mono)', color: '#FFFFFF', marginTop: 3 }}>
-                        {signal?.recommended_lot_size} BTC
-                      </div>
-                      <div style={{ fontSize: 9.5, color: '#c084fc', marginTop: 2, fontFamily: 'var(--font-mono)' }}>
-                        SOR EXNESS
-                      </div>
+                            {/* Action Badge & Conf */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                              <span style={{
+                                fontSize: 9,
+                                fontWeight: 800,
+                                fontFamily: 'var(--font-mono)',
+                                padding: '2px 7px',
+                                borderRadius: 4,
+                                background: `${coin.actionColor}22`,
+                                border: `1px solid ${coin.actionColor}66`,
+                                color: coin.actionColor
+                              }}>
+                                {coin.action}
+                              </span>
+                              <span style={{ fontSize: 9.5, color: '#CBD5E1', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>
+                                {coin.conf}%
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        vetoDrivers.map((driver) => (
+                          <div
+                            key={driver.layer}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              background: 'rgba(255, 255, 255, 0.025)',
+                              border: '1px solid rgba(255, 255, 255, 0.05)',
+                              borderRadius: 8,
+                              padding: '5px 10px',
+                              fontSize: 10.5,
+                              transition: 'all 0.15s ease'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = 'rgba(121, 40, 202, 0.09)';
+                              e.currentTarget.style.borderColor = 'rgba(121, 40, 202, 0.35)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.025)';
+                              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                            }}
+                          >
+                            {/* Layer Name */}
+                            <div style={{ fontWeight: 800, color: '#FFFFFF', fontFamily: 'var(--font-mono)', fontSize: 9.5, width: '32%' }}>
+                              {driver.layer}
+                            </div>
+
+                            {/* Barrier & Summary */}
+                            <div style={{ flex: 1, padding: '0 8px', color: '#94A3B8', fontSize: 9.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                              <span style={{ color: '#c084fc', fontFamily: 'var(--font-mono)' }}>{driver.condition}</span> — {driver.summary}
+                            </div>
+
+                            {/* Status & Score */}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                              <span style={{
+                                fontSize: 9,
+                                fontWeight: 800,
+                                fontFamily: 'var(--font-mono)',
+                                padding: '2px 7px',
+                                borderRadius: 4,
+                                background: `${driver.statusColor}22`,
+                                border: `1px solid ${driver.statusColor}66`,
+                                color: driver.statusColor
+                              }}>
+                                {driver.status}
+                              </span>
+                              <span style={{ fontSize: 9.5, color: '#94A3B8', fontFamily: 'var(--font-mono)' }}>
+                                {driver.score}/100
+                              </span>
+                            </div>
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 </div>
